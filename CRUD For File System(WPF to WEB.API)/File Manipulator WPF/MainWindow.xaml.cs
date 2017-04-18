@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Script.Serialization;
 using System.Windows;
 using System.Windows.Controls;
@@ -69,9 +70,11 @@ namespace File_Manipulator_WPF
         {
 
             HttpClient client = new HttpClient();
-            
 
-            client.GetAsync(@"http://localhost:58370/api/directory/?name=New Text Document.txt")
+            string url = string.Format("http://localhost:58370/api/directory?name={0}", Uri.EscapeDataString("New Text Document.txt"));
+           
+
+            client.GetAsync(url)
                 .ContinueWith(response =>
                 {
                     if (response.Exception != null)
