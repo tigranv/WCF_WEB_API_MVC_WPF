@@ -29,7 +29,7 @@
         <ListBox Name="listOfFiles" 
                  Grid.ColumnSpan="2" 
                  Height="90" 
-                 Margin="10">
+                 Margin="10" SelectionChanged="selectionEvent">
         </ListBox>
 
         <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"> File Name</TextBlock>

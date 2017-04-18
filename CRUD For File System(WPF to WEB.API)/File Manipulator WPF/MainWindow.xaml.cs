@@ -71,7 +71,7 @@ namespace File_Manipulator_WPF
 
             HttpClient client = new HttpClient();
 
-            string url = string.Format("http://localhost:58370/api/directory?name={0}", Uri.EscapeDataString("New Text Document.txt"));
+            string url = string.Format("http://localhost:58370/api/directory?name={0}", Uri.EscapeDataString(textBoxFileName.Text));
            
 
             client.GetAsync(url)
@@ -96,6 +96,11 @@ namespace File_Manipulator_WPF
                 });
 
 
+        }
+
+        private void selectionEvent(object sender, SelectionChangedEventArgs e)
+        {
+            textBoxFileName.Text = listOfFiles.SelectedItem.ToString();
         }
     }
 }
