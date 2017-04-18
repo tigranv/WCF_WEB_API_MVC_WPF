@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REST For FileSystem API", "REST For FileSystem API\REST For FileSystem API.csproj", "{2B287D92-5B6D-4AD1-88D8-1202D4D5A040}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "File Manipulator WPF", "File Manipulator WPF\File Manipulator WPF.csproj", "{D810E856-FF3C-4558-9D5D-F75951420010}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B287D92-5B6D-4AD1-88D8-1202D4D5A040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B287D92-5B6D-4AD1-88D8-1202D4D5A040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B287D92-5B6D-4AD1-88D8-1202D4D5A040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B287D92-5B6D-4AD1-88D8-1202D4D5A040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D810E856-FF3C-4558-9D5D-F75951420010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D810E856-FF3C-4558-9D5D-F75951420010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D810E856-FF3C-4558-9D5D-F75951420010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D810E856-FF3C-4558-9D5D-F75951420010}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
