@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:File_Manipulator_WPF"
         mc:Ignorable="d"
+        MinHeight="350"
+        MinWidth="525"
+        MaxWidth="525"
         Title="MainWindow" Height="350" Width="525">
     <Grid Margin="3" >
         <Grid.Background>
@@ -26,8 +29,7 @@
         <ListBox Name="listOfFiles" 
                  Grid.ColumnSpan="2" 
                  Height="90" 
-                 Margin="10"
-                 Visibility="Collapsed">
+                 Margin="10">
         </ListBox>
 
         <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"> File Name</TextBlock>
@@ -35,9 +37,9 @@
 
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" Margin="3">
-            <Button Content="Open File Content " Name="buttonGetByName" VerticalAlignment="Center" Padding="2" ></Button>
+            <Button Content="Open File Content " Name="buttonGetByName" VerticalAlignment="Center" Padding="2" Margin="30, 0, 0, 0" Click="buttonGetByName_Click"></Button>
             <Button Content="Update File Content" Name="UpdateFile" Padding="2" VerticalAlignment="Center" Margin="10, 0, 0, 0"></Button>
-            <Button Content="List of All Files" Name="GetAllFiles"  Padding="2" VerticalAlignment="Center" Margin="10, 0, 0, 0" ></Button>
+            <Button Content="List of All Files" Name="GetAllFiles"  Padding="2" VerticalAlignment="Center" Margin="10, 0, 0, 0" Click="GetAllFiles_Click" ></Button>
         </StackPanel>
 
         <TextBox Name="textBoxFileName" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="3"></TextBox>
