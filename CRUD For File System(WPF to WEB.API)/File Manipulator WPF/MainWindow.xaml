@@ -26,23 +26,34 @@
             <RowDefinition Height="170*" />
         </Grid.RowDefinitions>
 
-        <ListBox Name="listOfFiles" 
-                 Grid.ColumnSpan="2" 
-                 Height="90" 
-                 Margin="10" SelectionChanged="selectionEvent">
+        <Button Content="Browse File&#10;From Directory" Name="GetAllFiles"  Padding="3" VerticalAlignment="Center" Margin="5" Click="GetAllFiles_Click" FontWeight="Medium" FontSize="14" />
+
+
+        <ListBox Name="listOfFiles"   Margin="3"  Grid.Column="1" Grid.Row="0"      
+                 Height="90" Width="370"
+                 SelectionChanged="selectionEvent">
         </ListBox>
+
+        
+
+        
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" Margin="3">
+            <TextBox Name="textBoxFileName" Width="200" Height="25" VerticalAlignment="Center"  ></TextBox>
+            <Button Content="Open File Content " Name="buttonGetByName" VerticalAlignment="Center" Padding="2" Margin="15, 0, 0, 0" Click="buttonGetByName_Click"></Button>
+        </StackPanel>
 
         <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"> File Name</TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"> Content</TextBlock>
 
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" Margin="3">
-            <Button Content="Open File Content " Name="buttonGetByName" VerticalAlignment="Center" Padding="2" Margin="30, 0, 0, 0" Click="buttonGetByName_Click"></Button>
-            <Button Content="Update File Content" Name="UpdateFile" Padding="2" VerticalAlignment="Center" Margin="10, 0, 0, 0"></Button>
-            <Button Content="List of All Files" Name="GetAllFiles"  Padding="2" VerticalAlignment="Center" Margin="10, 0, 0, 0" Click="GetAllFiles_Click" ></Button>
+            <Button Content="Update File Content" Name="UpdateFile" Padding="2" VerticalAlignment="Center" Margin="0, 0, 0, 0"></Button>
+            <Button Content="Delete File" Name="Delete" Padding="2" VerticalAlignment="Center" Margin="10, 0, 0, 0" Click="Delete_Click"></Button>
+            <Button Content="Create New File" Name="Createnew" Padding="2" VerticalAlignment="Center" Margin="10, 0, 0, 0"></Button>
+
         </StackPanel>
 
-        <TextBox Name="textBoxFileName" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="3"></TextBox>
         <TextBox Name="textBoxFileContent" TextWrapping="Wrap" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="3"></TextBox>
 
 

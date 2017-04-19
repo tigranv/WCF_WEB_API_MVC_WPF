@@ -102,5 +102,14 @@ namespace File_Manipulator_WPF
         {
             textBoxFileName.Text = listOfFiles.SelectedItem.ToString();
         }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            HttpClient client = new HttpClient();
+            string url = string.Format("http://localhost:58370/api/directory?name={0}", Uri.EscapeDataString(textBoxFileName.Text));
+
+            client.DeleteAsync(url);
+
+        }
     }
 }

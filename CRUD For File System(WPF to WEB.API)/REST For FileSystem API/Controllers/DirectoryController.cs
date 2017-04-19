@@ -22,7 +22,7 @@ namespace REST_For_FileSystem_API.Controllers
         public string Get(string name)
         {
             DirectoryInfo directory = new DirectoryInfo(@"D:\TestDirectory");
-            string path = Path.Combine(@"D:\TestDirectory", name); //.Substring(1, name.Length - 2));
+            string path = Path.Combine(@"D:\TestDirectory", name); 
             StreamReader sr = File.OpenText(path);
             string textline = sr.ReadLine();
             sr.Close();
@@ -40,8 +40,20 @@ namespace REST_For_FileSystem_API.Controllers
         }
 
         // DELETE: api/Directory/5
-        public void Delete(int id)
+        public void Delete(string name)
         {
+            string fileName = Path.Combine(@"D:\TestDirectory", name);
+
+            string[] Files = Directory.GetFiles(@"D:\TestDirectory");
+
+            foreach (string file in Files)
+            {
+                if (file.ToUpper().Contains(fileName.ToUpper()))
+                {
+                    File.Delete(file);
+                }
+            }
         }
+            
     }
 }
