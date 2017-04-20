@@ -17,9 +17,10 @@ namespace GraphPlottinAPI.Controllers
         }
 
         // GET: api/PlotGraph/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+
+            return Ok();
         }
 
         // POST: api/PlotGraph

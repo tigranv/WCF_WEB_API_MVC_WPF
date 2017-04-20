@@ -1,0 +1,14 @@
+﻿<Window x:Class="GraphPlotApiClientWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GraphPlotApiClientWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="240" Margin="21,37,0,0" VerticalAlignment="Top" Width="463"/>
+        <Button x:Name="Draw_Sin" Content="Draw Sin" HorizontalAlignment="Left" Margin="21,292,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.498,-0.932" Click="Draw_Sin_Click"/>
+
+    </Grid>
+</Window>
