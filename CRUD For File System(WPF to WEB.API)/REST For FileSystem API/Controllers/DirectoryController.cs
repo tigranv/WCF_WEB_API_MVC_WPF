@@ -21,7 +21,7 @@ namespace REST_For_FileSystem_API.Controllers
         // GET: api/Directory/5
         public string Get(string name)
         {
-            DirectoryInfo directory = new DirectoryInfo(@"D:\TestDirectory");
+            //DirectoryInfo directory = new DirectoryInfo(@"D:\TestDirectory");
             string path = Path.Combine(@"D:\TestDirectory", name); 
             StreamReader sr = File.OpenText(path);
             string textline = sr.ReadLine();

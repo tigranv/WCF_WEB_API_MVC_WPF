@@ -32,11 +32,11 @@ namespace File_Manipulator_WPF
             InitializeComponent();
         }
 
-        private void GetAllFiles_Click(object sender, RoutedEventArgs e)
+        private async void GetAllFiles_Click(object sender, RoutedEventArgs e)
         {
             HttpClient client = new HttpClient();
 
-            client.GetAsync(@"http://localhost:58370/api/directory")
+            await client.GetAsync(@"http://localhost:58370/api/directory")
                 .ContinueWith(response =>
                 {
                     if (response.Exception != null)
@@ -50,10 +50,11 @@ namespace File_Manipulator_WPF
                         string responseText = message.Content.ReadAsStringAsync().Result;
 
                         JavaScriptSerializer jss = new JavaScriptSerializer();
-                        ObservableCollection<string> files = jss.Deserialize<ObservableCollection<string>>(responseText);                
+                        ObservableCollection<string> files = jss.Deserialize<ObservableCollection<string>>(responseText);
 
                         Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-                            (Action)(() => {
+                            (Action)(() =>
+                            {
                                 listOfFiles.DataContext = files;
 
                                 Binding binding = new Binding();
@@ -72,7 +73,7 @@ namespace File_Manipulator_WPF
             HttpClient client = new HttpClient();
 
             string url = string.Format("http://localhost:58370/api/directory?name={0}", Uri.EscapeDataString(textBoxFileName.Text));
-           
+
 
             client.GetAsync(url)
                 .ContinueWith(response =>
