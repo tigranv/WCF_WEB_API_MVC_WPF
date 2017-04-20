@@ -5,10 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphPlotApiClientWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="240" Margin="21,37,0,0" VerticalAlignment="Top" Width="463"/>
-        <Button x:Name="Draw_Sin" Content="Draw Sin" HorizontalAlignment="Left" Margin="21,292,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.498,-0.932" Click="Draw_Sin_Click"/>
+        Title="Graphic Plotter" Height="300" Width="525">
+    <Grid Background="#FF6198AB">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="136*" />
+            <ColumnDefinition Width="367*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="2 2 2 2">
+            <Canvas x:Name="canvas" Background="WhiteSmoke"  Height="200" Margin="10, 10, 10, 10" VerticalAlignment="Top" Width="350"/>
+            <Button x:Name="Draw_Graph" Content="Calculate and Plot Graphic" HorizontalAlignment="Center"     Click="Draw_Graph_Click" FontSize="16" FontWeight="Bold"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="2 2 2 2">
+            <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="14" FontWeight="Bold"> Math Function</TextBlock>
+            <RadioButton HorizontalAlignment="Left" Margin="10,10,0,0" GroupName="Functions">Sin</RadioButton>
+            <RadioButton HorizontalAlignment="Left" Margin="10,10,0,0" GroupName="Functions">Cos</RadioButton>
+            <RadioButton HorizontalAlignment="Left" Margin="10,10,0,0" GroupName="Functions">Log</RadioButton>
+            <RadioButton HorizontalAlignment="Left" Margin="10,10,0,0" GroupName="Functions">Pow</RadioButton>
+
+            <TextBlock HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="14" FontWeight="Bold"> Parameters</TextBlock>
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="2 2 2 2">
+                <TextBlock VerticalAlignment="Center" Margin="10,2,0,0">Amplitude -</TextBlock>
+                <TextBox VerticalAlignment="Center" Margin="5,2,0,0" Width="50"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="2 2 2 2">
+                <TextBlock VerticalAlignment="Center" Margin="10,2,0,0">Frequency -</TextBlock>
+                <TextBox VerticalAlignment="Center" Margin="5,2,0,0" Width="50"></TextBox>
+            </StackPanel>
+
+        </StackPanel>
+        
 
     </Grid>
 </Window>

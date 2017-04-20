@@ -22,7 +22,7 @@ namespace GraphPlotApiClientWPF
             InitializeComponent();
         }
 
-        private void Draw_Sin_Click(object sender, RoutedEventArgs e)
+        private void Draw_Graph_Click(object sender, RoutedEventArgs e)
         {
             AddChart();
         }

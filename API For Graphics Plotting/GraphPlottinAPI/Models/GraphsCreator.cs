@@ -23,6 +23,8 @@ namespace GraphPlottinAPI.Models
                 var y = Math.Sin(x);
                 xyList.Add(new Point() { X = x, Y = y });
             }
+
+            
             return xyList;
         }
         
