@@ -1,14 +1,19 @@
-﻿using System;
+﻿using GraphPlottinAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Windows;
+using System.Windows.Shapes;
 
 namespace GraphPlottinAPI.Controllers
 {
     public class PlotGraphController : ApiController
     {
+        private GraphsCreator CreateGraph;
+
         // GET: api/PlotGraph
         public IHttpActionResult Get()
         {
@@ -19,23 +24,12 @@ namespace GraphPlottinAPI.Controllers
         // GET: api/PlotGraph/5
         public IHttpActionResult Get(int id)
         {
-
-            return Ok();
+            CreateGraph = new GraphsCreator();
+            List<Models.Point> XYList = new List<Models.Point>();
+            XYList = CreateGraph.GetXY();
+            return Ok(XYList);
         }
 
-        // POST: api/PlotGraph
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/PlotGraph/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/PlotGraph/5
-        public void Delete(int id)
-        {
-        }
+        
     }
 }
