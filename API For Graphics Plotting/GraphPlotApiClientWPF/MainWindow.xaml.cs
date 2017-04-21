@@ -7,6 +7,8 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Newtonsoft.Json;
+using System.Net.Http.Formatting;
+
 
 
 namespace GraphPlotApiClientWPF
@@ -54,15 +56,38 @@ namespace GraphPlotApiClientWPF
 
         private void AddChart(string FuncName, RequestParameters parameters)
         {
-            JavaScriptSerializer jss = new JavaScriptSerializer();
-
-            var paramsasjson = jss.Serialize(parameters);
             HttpClient client = new HttpClient();
+
             string url = string.Format("http://localhost:53578/api/PlotGraph?function={0}",  Uri.EscapeDataString(FuncName));
 
-            //HttpContent contentPost = new StringContent(paramsasjson, System.Text.Encoding.UTF8);
+            client.PostAsync(url, parameters, new JsonMediaTypeFormatter())
+               .ContinueWith(response =>
+               {
+                   if (response.Exception != null)
+                   {
+                       MessageBox.Show(response.Exception.Message);
+                   }
+                   else
+                   {
+                       JavaScriptSerializer jss = new JavaScriptSerializer();
+                       HttpResponseMessage message = response.Result;
+                       string responseText = message.Content.ReadAsStringAsync().Result;
+                       List<Point> list = jss.Deserialize<List<Point>>(responseText);
 
-            //client.PostAsync(url, contentPost)
+                       Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                           (Action)(() =>
+                           {
+                               foreach (var item in list)
+                               {
+                                   polyline.Points.Add(CorrespondingPoint(new Point(item.X, item.Y)));
+                               }
+                               canvas.Children.Add(polyline);
+                           }));
+                   }
+               });
+
+
+            //client.GetAsync(url)
             //   .ContinueWith(response =>
             //   {
             //       if (response.Exception != null)
@@ -86,32 +111,6 @@ namespace GraphPlotApiClientWPF
             //               }));
             //       }
             //   });
-
-
-            client.GetAsync(url)
-               .ContinueWith(response =>
-               {
-                   if (response.Exception != null)
-                   {
-                       MessageBox.Show(response.Exception.Message);
-                   }
-                   else
-                   {
-                       HttpResponseMessage message = response.Result;
-                       string responseText = message.Content.ReadAsStringAsync().Result;
-                       List<Point> list = jss.Deserialize<List<Point>>(responseText);
-
-                       Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-                           (Action)(() =>
-                           {
-                               foreach (var item in list)
-                               {
-                                   polyline.Points.Add(CorrespondingPoint(new Point(item.X, item.Y)));
-                               }
-                               canvas.Children.Add(polyline);
-                           }));
-                   }
-               });
 
         }
 
