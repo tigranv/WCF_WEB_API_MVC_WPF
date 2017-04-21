@@ -13,14 +13,11 @@ namespace GraphPlotApiClientWPF
 
         public double Amplitude { get; set; }
 
-        public double frequency { get; set; }
-
         public RequestParameters()
         {
             X = 1;
             N = 1;
             Amplitude = 1;
-            frequency = 1;
         }
     }
 }

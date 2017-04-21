@@ -16,50 +16,64 @@ namespace GraphPlotApiClientWPF
 
     public partial class MainWindow : Window
     {
-        private Polyline polyline;
 
         public MainWindow()
         {
-            polyline = new Polyline { Stroke = Brushes.Black };
             InitializeComponent();
         }
 
         private void Draw_Graph_Click(object sender, RoutedEventArgs e)
-        {
+        {        
             RequestParameters param = new RequestParameters();
-        
-            if ((Boolean)SinRadioBt.IsChecked)
+               
+            if ((bool)SinRadioBt.IsChecked)
             {
                 param.Amplitude = double.Parse(AmplitudeTexXox.Text);
-                param.frequency = double.Parse(FrequencyTextBox.Text);
-                AddChart(SinRadioBt.Name, param);
+                AddChart("Sin", param);
             }
-            else if ((Boolean)CosRadioBt.IsChecked)
+            else if ((bool)CosRadioBt.IsChecked)
             {
                 param.Amplitude = double.Parse(AmplitudeTexXox.Text);
-                param.frequency = double.Parse(FrequencyTextBox.Text);
-                AddChart(CosRadioBt.Name, param);
+                AddChart("Cos", param);
             }
-            else if ((Boolean)PowRadioBt.IsChecked)
+            else if ((bool)CosDescRadioBt.IsChecked)
             {
-                param.N = int.Parse(PowN.Text);
-                AddChart(PowRadioBt.Name, param);
+                param.Amplitude = double.Parse(AmplitudeTexXox.Text);
+                AddChart("CosDesc", param);
             }
-            else if ((Boolean)LogRadioBt.IsChecked)
+            else if ((bool)SinAsceRadioBt.IsChecked)
             {
-                param.X = double.Parse(LogX.Text);
-                AddChart(LogRadioBt.Name, param);
+                param.Amplitude = double.Parse(AmplitudeTexXox.Text);
+                AddChart("SinAsceRadioBt", param);
             }
-            else
-            {
-                
-            }
-
         }
 
         private void AddChart(string FuncName, RequestParameters parameters)
         {
+
             HttpClient client = new HttpClient();
+            Polyline polyline = new Polyline { Stroke = Brushes.Black };
+
+            List<SolidColorBrush> ColorList = new List<SolidColorBrush>();
+            ColorList.Add(Brushes.Red);
+            ColorList.Add(Brushes.Green);
+            ColorList.Add(Brushes.Blue);
+            ColorList.Add(Brushes.Yellow);
+            ColorList.Add(Brushes.Orange);
+            ColorList.Add(Brushes.Black);
+
+            if (!(bool)ComparerRadioBt.IsChecked)
+            {
+                if (canvas.Children.Count != 0) { canvas.Children.Clear(); }
+            }
+            else
+            {
+                Random rd = new Random();
+                polyline.Stroke =  ColorList[rd.Next(0, 5)];
+            }
+
+            
+
 
             string url = string.Format("http://localhost:53578/api/PlotGraph?function={0}",  Uri.EscapeDataString(FuncName));
 
@@ -77,6 +91,7 @@ namespace GraphPlotApiClientWPF
                        string responseText = message.Content.ReadAsStringAsync().Result;
                        List<Point> list = jss.Deserialize<List<Point>>(responseText);
 
+
                        Dispatcher.BeginInvoke(DispatcherPriority.Normal,
                            (Action)(() =>
                            {
@@ -84,7 +99,7 @@ namespace GraphPlotApiClientWPF
                                {
                                    polyline.Points.Add(CorrespondingPoint(new Point(item.X, item.Y)));
                                }
-                               canvas.Children.Remove(polyline);
+                               //canvas.Children.Clear();
                                canvas.Children.Add(polyline);
                            }));
                    }
@@ -94,13 +109,15 @@ namespace GraphPlotApiClientWPF
         private Point CorrespondingPoint(Point pt)
         {
         double xmin = 0;
-        double xmax = 6.5;
+        double xmax = 20;
         double ymin = -1.1;
         double ymax = 1.1;
+        double.TryParse(FrequencyTextBox.Text, out xmax);
 
-        var result = new Point
+
+            var result = new Point
             {
-                X = (pt.X - xmin) * canvas.Width / (xmax - xmin),
+                X = (pt.X - xmin) * canvas.Width / (xmax*10 - xmin),
                 Y = canvas.Height - (pt.Y - ymin) * canvas.Height / (ymax - ymin)
             };
             return result;
@@ -108,9 +125,11 @@ namespace GraphPlotApiClientWPF
 
         private void ClearButtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (canvas.Children.Count != 0) canvas.Children.Clear();
         }
     }
+
+    
 }
 
 

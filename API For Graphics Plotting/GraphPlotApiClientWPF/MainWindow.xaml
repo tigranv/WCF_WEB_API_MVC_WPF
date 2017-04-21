@@ -16,28 +16,20 @@
             <Canvas x:Name="canvas" Background="WhiteSmoke"  Height="200" Margin="10, 10, 10, 0" VerticalAlignment="Top" Width="350"/>
 
             <StackPanel Orientation="Horizontal" Margin="3">
-                <Button x:Name="Draw_Graph" Content="Plot The Graphic" Padding="5, 0" HorizontalAlignment="Left" Height="30" Margin="10"   Click="Draw_Graph_Click" FontSize="16" FontWeight="Bold"/>
-                <Button x:Name="ClearButtn" Content="Remove All" Padding="5, 0"  Height="30"    Margin="110, 5, 5, 5" FontSize="16" FontWeight="Bold" Click="ClearButtn_Click"/>
+                <Button x:Name="Draw_Graph" Content="Plot The Graphic" Padding="5, 0" HorizontalAlignment="Left" Height="30" Margin="8"   Click="Draw_Graph_Click" FontSize="14" FontWeight="Bold"/>
+                <RadioButton Name="ComparerRadioBt" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Center" FontWeight="Bold">Compare Mode</RadioButton>
+                <Button x:Name="ClearButtn" Content="Remove All" Padding="5, 0"  Height="30"    Margin="10, 5, 5, 5" FontSize="14" FontWeight="Bold" Click="ClearButtn_Click"/>
 
             </StackPanel>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="2 2 2 2">
             <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="14" FontWeight="Bold"> Math Function</TextBlock>
-            <RadioButton Name="SinRadioBt" HorizontalAlignment="Left" Margin="10,10,0,0" GroupName="FunctionsRadiobutton">Sin</RadioButton>
-            <RadioButton Name="CosRadioBt" HorizontalAlignment="Left" Margin="10,10,0,0" GroupName="FunctionsRadiobutton">Cos</RadioButton>
-            
-            <StackPanel Orientation="Horizontal" Grid.Column="0" >
-                <RadioButton Name="LogRadioBt" HorizontalAlignment="Left" Margin="10,10,0,0" GroupName="FunctionsRadiobutton">Log</RadioButton>
-                <TextBlock VerticalAlignment="Center" Margin="10,7,0,0">x </TextBlock>
-                <TextBox Name="LogX" VerticalAlignment="Center" Margin="5,7,0,0" Width="40" Height="18"></TextBox>
-            </StackPanel>
+            <RadioButton Name="SinRadioBt" HorizontalAlignment="Left" Margin="10,10,0,0" GroupName="FunctionsRadiobutton">Sin(x)</RadioButton>
+            <RadioButton Name="CosRadioBt" HorizontalAlignment="Left" Margin="10,10,0,0" GroupName="FunctionsRadiobutton">Cos(x)</RadioButton>
+            <RadioButton Name="SinAsceRadioBt" HorizontalAlignment="Left" Margin="10,10,0,0" GroupName="FunctionsRadiobutton">A(1/x)Sin(x)</RadioButton>
+            <RadioButton Name="CosDescRadioBt" HorizontalAlignment="Left" Margin="10,10,0,0" GroupName="FunctionsRadiobutton">A(x)Cos(x)</RadioButton>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="0" >
-                <RadioButton Name="PowRadioBt" HorizontalAlignment="Left" Margin="10,10,0,0" GroupName="FunctionsRadiobutton">Pow</RadioButton>
-                <TextBlock VerticalAlignment="Center" Margin="5,7,0,0" Height="18">n</TextBlock>
-                <TextBox Name="PowN" VerticalAlignment="Center" Margin="5,7,0,0" Width="40" Height="18"></TextBox>
-            </StackPanel>
 
             <TextBlock HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="14" FontWeight="Bold"> Parameters</TextBlock>
             <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="2 2 2 2">

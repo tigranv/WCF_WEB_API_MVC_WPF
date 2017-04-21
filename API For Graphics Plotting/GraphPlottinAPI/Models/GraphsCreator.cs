@@ -10,22 +10,59 @@ namespace GraphPlottinAPI.Models
 {
     public class GraphsCreator
     {
-        private List<Point> xyList;
 
-        public GraphsCreator()
+        public List<Point> GetXY(string functName, RequestParameters par)
         {
-            xyList = new List<Point>();
-        }
+            List<Point> xyList = new List<Point>();
 
-        public List<Point> GetXY(RequestParameters par)
-        {
-
-            for (int i = 0; i < 70; i++)
+            switch (functName)
             {
-                var x = i / 5.0;
-                var y = par.Amplitude*Math.Sin(par.frequency*x);
-                xyList.Add(new Point() { X = x, Y = y });
+                case "Sin":
+                    {
+                        for (int i = 0; i < 2000; i++)
+                        {
+                            var x = i / 5.0;
+                            var y = par.Amplitude * 0.1 * Math.Sin(x);
+                            xyList.Add(new Point() { X = x, Y = y });
+                        }
+                        break;
+                    }
+
+                case "Cos":
+                    {
+                        for (int i = 0; i < 2000; i++)
+                        {
+                            var x = i / 5.0;
+                            var y = par.Amplitude * 0.1 * Math.Cos(x);
+                            xyList.Add(new Point() { X = x, Y = y });
+                        }
+                        break;
+                    }
+
+                case "SinAsceRadioBt":
+                    {
+                        for (int i = 0; i < 2000; i++)
+                        {
+                            var x = i / 5.0;
+                            var y = par.Amplitude * 0.1 * Math.Sin(x) * i/100;
+                            xyList.Add(new Point() { X = x, Y = y });
+                        }
+                        break;
+                    }
+
+                case "CosDesc":
+                    {
+                        for (int i = 0; i < 2000; i++)
+                        {
+                            var x = i / 5.0;
+                            var y = par.Amplitude * 0.01 * Math.Cos(x) * (2000-i) / 100;
+                            xyList.Add(new Point() { X = x, Y = y });
+                        }
+                        break;
+                    }
+
             }
+            
 
             
             return xyList;
