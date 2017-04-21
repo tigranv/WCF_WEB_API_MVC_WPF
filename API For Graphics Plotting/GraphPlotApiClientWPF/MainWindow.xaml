@@ -13,8 +13,13 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="2 2 2 2">
-            <Canvas x:Name="canvas" Background="WhiteSmoke"  Height="200" Margin="10, 10, 10, 10" VerticalAlignment="Top" Width="350"/>
-            <Button x:Name="Draw_Graph" Content="Calculate and Plot Graphic" HorizontalAlignment="Center"     Click="Draw_Graph_Click" FontSize="16" FontWeight="Bold"/>
+            <Canvas x:Name="canvas" Background="WhiteSmoke"  Height="200" Margin="10, 10, 10, 0" VerticalAlignment="Top" Width="350"/>
+
+            <StackPanel Orientation="Horizontal" Margin="3">
+                <Button x:Name="Draw_Graph" Content="Plot The Graphic" Padding="5, 0" HorizontalAlignment="Left" Height="30" Margin="10"   Click="Draw_Graph_Click" FontSize="16" FontWeight="Bold"/>
+                <Button x:Name="ClearButtn" Content="Remove All" Padding="5, 0"  Height="30"    Margin="110, 5, 5, 5" FontSize="16" FontWeight="Bold" Click="ClearButtn_Click"/>
+
+            </StackPanel>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="2 2 2 2">
@@ -30,10 +35,8 @@
 
             <StackPanel Orientation="Horizontal" Grid.Column="0" >
                 <RadioButton Name="PowRadioBt" HorizontalAlignment="Left" Margin="10,10,0,0" GroupName="FunctionsRadiobutton">Pow</RadioButton>
-                <TextBlock VerticalAlignment="Center" Margin="10,7,0,0" Height="18">x</TextBlock>
-                <TextBox Name="PowX" VerticalAlignment="Center" Margin="5,7,0,0" Width="20" Height="15"></TextBox>
                 <TextBlock VerticalAlignment="Center" Margin="5,7,0,0" Height="18">n</TextBlock>
-                <TextBox Name="PowN" VerticalAlignment="Center" Margin="5,7,0,0" Width="20" Height="15"></TextBox>
+                <TextBox Name="PowN" VerticalAlignment="Center" Margin="5,7,0,0" Width="40" Height="18"></TextBox>
             </StackPanel>
 
             <TextBlock HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="14" FontWeight="Bold"> Parameters</TextBlock>

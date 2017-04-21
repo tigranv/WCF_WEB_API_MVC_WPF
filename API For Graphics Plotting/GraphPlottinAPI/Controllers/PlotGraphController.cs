@@ -16,11 +16,11 @@ namespace GraphPlottinAPI.Controllers
         private GraphsCreator CreateGraph;
 
         // GET: api/PlotGraph
-        public IHttpActionResult Get()
-        {
-            string result = "Please send parameters to get your plot";
-            return Ok(result);
-        }
+        //public IHttpActionResult Get()
+        //{
+        //    string result = "Please send parameters to get your plot";
+        //    return Ok(result);
+        //}
 
         // GET: api/PlotGraph/5
         //public IHttpActionResult Get([FromUri]string function)
@@ -32,14 +32,14 @@ namespace GraphPlottinAPI.Controllers
         //    return Ok(XYList);
         //}
 
-        public IHttpActionResult Post([FromUri]string function, [FromBody] string param)
+        public IHttpActionResult Post([FromUri]string function, [FromBody] RequestParameters param)
         {
             //JavaScriptSerializer jss = new JavaScriptSerializer();
             //RequestParameters parameter = jss.Deserialize<RequestParameters>(param);
 
             CreateGraph = new GraphsCreator();
             List<Models.Point> XYList = new List<Models.Point>();
-            XYList = CreateGraph.GetXY();
+            XYList = CreateGraph.GetXY(param);
             return Ok(XYList);
         }
 

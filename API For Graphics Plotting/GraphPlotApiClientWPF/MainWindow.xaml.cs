@@ -21,28 +21,27 @@ namespace GraphPlotApiClientWPF
         public MainWindow()
         {
             polyline = new Polyline { Stroke = Brushes.Black };
-
             InitializeComponent();
         }
 
         private void Draw_Graph_Click(object sender, RoutedEventArgs e)
         {
             RequestParameters param = new RequestParameters();
-            param.Amplitude = double.Parse(AmplitudeTexXox.Text);
-            param.frequency = double.Parse(FrequencyTextBox.Text);
-
+        
             if ((Boolean)SinRadioBt.IsChecked)
             {
+                param.Amplitude = double.Parse(AmplitudeTexXox.Text);
+                param.frequency = double.Parse(FrequencyTextBox.Text);
                 AddChart(SinRadioBt.Name, param);
             }
-
             else if ((Boolean)CosRadioBt.IsChecked)
             {
+                param.Amplitude = double.Parse(AmplitudeTexXox.Text);
+                param.frequency = double.Parse(FrequencyTextBox.Text);
                 AddChart(CosRadioBt.Name, param);
             }
             else if ((Boolean)PowRadioBt.IsChecked)
             {
-                param.X = double.Parse(PowX.Text);
                 param.N = int.Parse(PowN.Text);
                 AddChart(PowRadioBt.Name, param);
             }
@@ -50,6 +49,10 @@ namespace GraphPlotApiClientWPF
             {
                 param.X = double.Parse(LogX.Text);
                 AddChart(LogRadioBt.Name, param);
+            }
+            else
+            {
+                
             }
 
         }
@@ -81,37 +84,11 @@ namespace GraphPlotApiClientWPF
                                {
                                    polyline.Points.Add(CorrespondingPoint(new Point(item.X, item.Y)));
                                }
+                               canvas.Children.Remove(polyline);
                                canvas.Children.Add(polyline);
                            }));
                    }
                });
-
-
-            //client.GetAsync(url)
-            //   .ContinueWith(response =>
-            //   {
-            //       if (response.Exception != null)
-            //       {
-            //           MessageBox.Show(response.Exception.Message);
-            //       }
-            //       else
-            //       {
-            //           HttpResponseMessage message = response.Result;
-            //           string responseText = message.Content.ReadAsStringAsync().Result;
-            //           List<Point> list = jss.Deserialize<List<Point>>(responseText);
-
-            //           Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-            //               (Action)(() =>
-            //               {
-            //                   foreach (var item in list)
-            //                   {
-            //                       polyline.Points.Add(CorrespondingPoint(new Point(item.X, item.Y)));
-            //                   }
-            //                   canvas.Children.Add(polyline);
-            //               }));
-            //       }
-            //   });
-
         }
 
         private Point CorrespondingPoint(Point pt)
@@ -129,7 +106,35 @@ namespace GraphPlotApiClientWPF
             return result;
         }
 
+        private void ClearButtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 
 
+//client.GetAsync(url)
+//   .ContinueWith(response =>
+//   {
+//       if (response.Exception != null)
+//       {
+//           MessageBox.Show(response.Exception.Message);
+//       }
+//       else
+//       {
+//           HttpResponseMessage message = response.Result;
+//           string responseText = message.Content.ReadAsStringAsync().Result;
+//           List<Point> list = jss.Deserialize<List<Point>>(responseText);
+
+//           Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+//               (Action)(() =>
+//               {
+//                   foreach (var item in list)
+//                   {
+//                       polyline.Points.Add(CorrespondingPoint(new Point(item.X, item.Y)));
+//                   }
+//                   canvas.Children.Add(polyline);
+//               }));
+//       }
+//   });

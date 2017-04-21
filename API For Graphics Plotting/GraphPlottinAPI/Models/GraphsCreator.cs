@@ -12,15 +12,18 @@ namespace GraphPlottinAPI.Models
     {
         private List<Point> xyList;
 
-
-        public List<Point> GetXY()
+        public GraphsCreator()
         {
             xyList = new List<Point>();
+        }
+
+        public List<Point> GetXY(RequestParameters par)
+        {
 
             for (int i = 0; i < 70; i++)
             {
                 var x = i / 5.0;
-                var y = Math.Sin(x);
+                var y = par.Amplitude*Math.Sin(par.frequency*x);
                 xyList.Add(new Point() { X = x, Y = y });
             }
 
