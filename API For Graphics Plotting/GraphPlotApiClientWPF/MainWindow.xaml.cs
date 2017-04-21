@@ -6,6 +6,8 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Newtonsoft.Json;
+
 
 namespace GraphPlotApiClientWPF
 {
@@ -13,7 +15,6 @@ namespace GraphPlotApiClientWPF
     public partial class MainWindow : Window
     {
         private Polyline polyline;
-        private HttpClient client;
 
         public MainWindow()
         {
@@ -24,14 +25,68 @@ namespace GraphPlotApiClientWPF
 
         private void Draw_Graph_Click(object sender, RoutedEventArgs e)
         {
-            AddChart();
+            RequestParameters param = new RequestParameters();
+            param.Amplitude = double.Parse(AmplitudeTexXox.Text);
+            param.frequency = double.Parse(FrequencyTextBox.Text);
+
+            if ((Boolean)SinRadioBt.IsChecked)
+            {
+                AddChart(SinRadioBt.Name, param);
+            }
+
+            else if ((Boolean)CosRadioBt.IsChecked)
+            {
+                AddChart(CosRadioBt.Name, param);
+            }
+            else if ((Boolean)PowRadioBt.IsChecked)
+            {
+                param.X = double.Parse(PowX.Text);
+                param.N = int.Parse(PowN.Text);
+                AddChart(PowRadioBt.Name, param);
+            }
+            else if ((Boolean)LogRadioBt.IsChecked)
+            {
+                param.X = double.Parse(LogX.Text);
+                AddChart(LogRadioBt.Name, param);
+            }
+
         }
 
-        private void AddChart()
+        private void AddChart(string FuncName, RequestParameters parameters)
         {
-            HttpClient client = new HttpClient();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
 
-            string url = string.Format("http://localhost:53578/api/PlotGraph?id={0}", Uri.EscapeDataString("1"));
+            var paramsasjson = jss.Serialize(parameters);
+            HttpClient client = new HttpClient();
+            string url = string.Format("http://localhost:53578/api/PlotGraph?function={0}",  Uri.EscapeDataString(FuncName));
+
+            //HttpContent contentPost = new StringContent(paramsasjson, System.Text.Encoding.UTF8);
+
+            //client.PostAsync(url, contentPost)
+            //   .ContinueWith(response =>
+            //   {
+            //       if (response.Exception != null)
+            //       {
+            //           MessageBox.Show(response.Exception.Message);
+            //       }
+            //       else
+            //       {
+            //           HttpResponseMessage message = response.Result;
+            //           string responseText = message.Content.ReadAsStringAsync().Result;
+            //           List<Point> list = jss.Deserialize<List<Point>>(responseText);
+
+            //           Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+            //               (Action)(() =>
+            //               {
+            //                   foreach (var item in list)
+            //                   {
+            //                       polyline.Points.Add(CorrespondingPoint(new Point(item.X, item.Y)));
+            //                   }
+            //                   canvas.Children.Add(polyline);
+            //               }));
+            //       }
+            //   });
+
 
             client.GetAsync(url)
                .ContinueWith(response =>
@@ -44,10 +99,8 @@ namespace GraphPlotApiClientWPF
                    {
                        HttpResponseMessage message = response.Result;
                        string responseText = message.Content.ReadAsStringAsync().Result;
-
-                       JavaScriptSerializer jss = new JavaScriptSerializer();
                        List<Point> list = jss.Deserialize<List<Point>>(responseText);
-                       
+
                        Dispatcher.BeginInvoke(DispatcherPriority.Normal,
                            (Action)(() =>
                            {
@@ -58,8 +111,8 @@ namespace GraphPlotApiClientWPF
                                canvas.Children.Add(polyline);
                            }));
                    }
-               });             
-            
+               });
+
         }
 
         private Point CorrespondingPoint(Point pt)

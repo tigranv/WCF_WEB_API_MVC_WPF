@@ -22,14 +22,23 @@ namespace GraphPlottinAPI.Controllers
         }
 
         // GET: api/PlotGraph/5
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get([FromUri]string function)
         {
+            
             CreateGraph = new GraphsCreator();
             List<Models.Point> XYList = new List<Models.Point>();
             XYList = CreateGraph.GetXY();
             return Ok(XYList);
         }
 
-        
+        public IHttpActionResult Post([FromUri]string function, [FromBody] string param)
+        {
+
+            CreateGraph = new GraphsCreator();
+            List<Models.Point> XYList = new List<Models.Point>();
+            XYList = CreateGraph.GetXY();
+            return Ok(XYList);
+        }
+
     }
 }
