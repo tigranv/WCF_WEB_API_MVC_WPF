@@ -73,6 +73,22 @@ namespace GraphPlotApiClientWPF
 
             string url = string.Format("http://localhost:53578/api/PlotGraph?function={0}",  Uri.EscapeDataString(FuncName));
 
+
+            //HttpResponseMessage message = client.PostAsync(url, parameters, new JsonMediaTypeFormatter()).Result;
+
+            //JavaScriptSerializer jss = new JavaScriptSerializer();
+            //string responseText = message.Content.ReadAsStringAsync().Result;
+            //List<Point> list = jss.Deserialize<List<Point>>(responseText);
+
+            //foreach (var item in list)
+            //{
+            //    polyline.Points.Add(CorrespondingPoint(new Point(item.X, item.Y)));
+            //}
+            //canvas.Children.Add(polyline);
+
+
+
+
             client.PostAsync(url, parameters, new JsonMediaTypeFormatter())
                .ContinueWith(response =>
                {
