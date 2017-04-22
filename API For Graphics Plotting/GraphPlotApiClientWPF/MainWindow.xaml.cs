@@ -8,8 +8,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using Newtonsoft.Json;
 using System.Net.Http.Formatting;
-
-
+using System.Windows.Controls;
 
 namespace GraphPlotApiClientWPF
 {
@@ -25,25 +24,24 @@ namespace GraphPlotApiClientWPF
         private void Draw_Graph_Click(object sender, RoutedEventArgs e)
         {        
             RequestParameters param = new RequestParameters();
-               
+
+            if (AmplitudeTexXox.Text == null) AmplitudeTexXox.Text = "5";
+            else param.Amplitude = double.Parse(AmplitudeTexXox.Text);
+
             if ((bool)SinRadioBt.IsChecked)
             {
-                param.Amplitude = double.Parse(AmplitudeTexXox.Text);
                 AddChart("Sin", param);
             }
             else if ((bool)CosRadioBt.IsChecked)
             {
-                param.Amplitude = double.Parse(AmplitudeTexXox.Text);
                 AddChart("Cos", param);
             }
             else if ((bool)CosDescRadioBt.IsChecked)
             {
-                param.Amplitude = double.Parse(AmplitudeTexXox.Text);
                 AddChart("CosDesc", param);
             }
             else if ((bool)SinAsceRadioBt.IsChecked)
             {
-                param.Amplitude = double.Parse(AmplitudeTexXox.Text);
                 AddChart("SinAsceRadioBt", param);
             }
         }
@@ -58,7 +56,6 @@ namespace GraphPlotApiClientWPF
             ColorList.Add(Brushes.Red);
             ColorList.Add(Brushes.Green);
             ColorList.Add(Brushes.Blue);
-            ColorList.Add(Brushes.Yellow);
             ColorList.Add(Brushes.Orange);
             ColorList.Add(Brushes.Black);
 
@@ -69,7 +66,7 @@ namespace GraphPlotApiClientWPF
             else
             {
                 Random rd = new Random();
-                polyline.Stroke =  ColorList[rd.Next(0, 5)];
+                polyline.Stroke =  ColorList[rd.Next(0, 4)];
             }
 
             
@@ -126,6 +123,28 @@ namespace GraphPlotApiClientWPF
         private void ClearButtn_Click(object sender, RoutedEventArgs e)
         {
             if (canvas.Children.Count != 0) canvas.Children.Clear();
+        }
+
+        private bool JustChecked;
+
+        private void RB_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton s = (RadioButton)sender;
+            // Action on Check...
+            JustChecked = true;
+        }
+
+        private void RB_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (JustChecked)
+            {
+                JustChecked = false;
+                e.Handled = true;
+                return;
+            }
+            RadioButton s = (RadioButton)sender;
+            if ((bool)ComparerRadioBt.IsChecked)
+                s.IsChecked = false;
         }
     }
 

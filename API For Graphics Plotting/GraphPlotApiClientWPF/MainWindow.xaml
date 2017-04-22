@@ -13,11 +13,11 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="2 2 2 2">
-            <Canvas x:Name="canvas" Background="WhiteSmoke"  Height="200" Margin="10, 10, 10, 0" VerticalAlignment="Top" Width="350"/>
+            <Canvas x:Name="canvas" ClipToBounds="True" Background="WhiteSmoke"  Height="200" Margin="10, 10, 10, 0" VerticalAlignment="Top" Width="350"/>
 
             <StackPanel Orientation="Horizontal" Margin="3">
                 <Button x:Name="Draw_Graph" Content="Plot The Graphic" Padding="5, 0" HorizontalAlignment="Left" Height="30" Margin="8"   Click="Draw_Graph_Click" FontSize="14" FontWeight="Bold"/>
-                <RadioButton Name="ComparerRadioBt" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Center" FontWeight="Bold">Compare Mode</RadioButton>
+                <RadioButton Name="ComparerRadioBt" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Center" FontWeight="Bold" Checked="RB_Checked" Click="RB_Clicked">Compare Mode</RadioButton>
                 <Button x:Name="ClearButtn" Content="Remove All" Padding="5, 0"  Height="30"    Margin="10, 5, 5, 5" FontSize="14" FontWeight="Bold" Click="ClearButtn_Click"/>
 
             </StackPanel>
