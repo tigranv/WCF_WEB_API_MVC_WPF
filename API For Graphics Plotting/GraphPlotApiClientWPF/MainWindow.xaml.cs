@@ -23,9 +23,9 @@ namespace GraphPlotApiClientWPF
         private void Draw_Graph_Click(object sender, RoutedEventArgs e)
         {        
             RequestParameters param = new RequestParameters();
-
-            if (AmplitudeTexXox.Text == null) AmplitudeTexXox.Text = "5";
-            else param.Amplitude = double.Parse(AmplitudeTexXox.Text);
+            double temp = 20;
+            double.TryParse(AmplitudeTexXox.Text, out temp);
+            param.Amplitude = temp;
 
             if ((bool)SinRadioBt.IsChecked)
             {
