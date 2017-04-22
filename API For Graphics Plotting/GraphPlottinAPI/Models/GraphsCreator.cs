@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Shapes;
 
 
 
@@ -13,6 +10,7 @@ namespace GraphPlottinAPI.Models
 
         public List<Point> GetXY(string functName, RequestParameters par)
         {
+            
             List<Point> xyList = new List<Point>();
 
             switch (functName)
