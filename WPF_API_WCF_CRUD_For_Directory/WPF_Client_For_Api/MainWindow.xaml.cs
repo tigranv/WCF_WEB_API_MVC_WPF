@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Web.Script.Serialization;
+using System.Collections.ObjectModel;
+using System.Windows.Threading;
 
 namespace WPF_Client_For_Api
 {
@@ -20,14 +24,89 @@ namespace WPF_Client_For_Api
     /// </summary>
     public partial class MainWindow : Window
     {
+        ObservableCollection<string> files;
         public MainWindow()
         {
             InitializeComponent();
-            TextBox_Content.Text = "Lorem ipsum sno";
         }
 
-        private void Bt_Show_All_Files(object sender, RoutedEventArgs e)
+        private async void Bt_Show_All_Files_Click(object sender, RoutedEventArgs e)
         {
+            if(files != null) files.Clear();
+            HttpClient client = new HttpClient();
+            string url = string.Format("http://localhost:60523/api/main?dirName={0}", Uri.EscapeDataString(Directory_Name_TextBox.Text));
+
+            await client.GetAsync(url)
+                .ContinueWith(response =>
+                {
+                if (response.Exception != null)
+                {
+                    MessageBox.Show(response.Exception.Message);
+                }
+                else
+                {
+                        HttpResponseMessage message = response.Result;
+                        string responseText = message.Content.ReadAsStringAsync().Result;
+
+                        JavaScriptSerializer jss = new JavaScriptSerializer();
+                        files = jss.Deserialize<ObservableCollection<string>>(responseText);
+
+                        Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                            (Action)(() =>
+                            {
+                                
+
+                                ListBox_FilesName.DataContext = files;
+
+                                Binding binding = new Binding();
+                                ListBox_FilesName.SetBinding(ItemsControl.ItemsSourceProperty, binding);
+
+                                (ListBox_FilesName.ItemsSource as ObservableCollection<string>).RemoveAt(0);
+                            }));
+                    }
+                });
+        }
+
+        private async void SelectItemEvent(object sender, SelectionChangedEventArgs e)
+        {
+            if(ListBox_FilesName.SelectedItem != null)
+            {
+                HttpClient client = new HttpClient();
+                string url = $"http://localhost:60523/api/main?dirName={Directory_Name_TextBox.Text}&fileName={ListBox_FilesName.SelectedItem.ToString()}";
+
+                await client.GetAsync(url)
+                    .ContinueWith(response =>
+                    {
+                        if (response.Exception != null)
+                        {
+                            MessageBox.Show(response.Exception.Message);
+                        }
+                        else
+                        {
+                            HttpResponseMessage message = response.Result;
+                            string responseText = message.Content.ReadAsStringAsync().Result;
+
+                            JavaScriptSerializer jss = new JavaScriptSerializer();
+                            string content = jss.Deserialize<string>(responseText);
+
+                            Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                                (Action)(() => { ContentTextbox.Text = content; }));
+                        }
+                    });
+            }
+            
+
+        }
+
+        private void Delete_Button_click(object sender, RoutedEventArgs e)
+        {
+            if(ListBox_FilesName.SelectedItem != null)
+            {
+                HttpClient client = new HttpClient();
+                string url = $"http://localhost:60523/api/main?dirName={Directory_Name_TextBox.Text}&fileName={ListBox_FilesName.SelectedItem.ToString()}";
+                client.DeleteAsync(url);
+                if (files != null) files.RemoveAt(files.IndexOf(ListBox_FilesName.SelectedItem.ToString()));
+            }
 
         }
     }

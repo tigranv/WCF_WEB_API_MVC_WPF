@@ -21,8 +21,8 @@
 
             <StackPanel Grid.Row="0" Margin="3" Orientation="Horizontal">
                 <TextBlock Margin="5, 5" Padding="3" FontSize="13" FontWeight="Bold">Enter Directory Name</TextBlock>
-                <TextBox Margin="5, 5" Padding="3" Width="250"></TextBox>
-                <Button Name ="Bt_Show_All_Files" Margin="5,5,5,0" Padding="3" FontSize="13" Height="24" VerticalAlignment="Top" Click="Bt_Show_All_Files" >Show All Files</Button>
+                <TextBox Name ="Directory_Name_TextBox" Margin="5, 5" Padding="3" Width="250"></TextBox>
+                <Button Name ="Bt_Show_All_Files" Margin="5,5,5,0" Padding="3" FontSize="13" Height="24" VerticalAlignment="Top" Click="Bt_Show_All_Files_Click" >Show All Files</Button>
             </StackPanel>
 
             <Border Grid.Row="1"  BorderBrush="Black" BorderThickness="2">
@@ -35,10 +35,8 @@
                     <Border BorderBrush="Black" BorderThickness="0,0,2,0">
                         <StackPanel Grid.Column="0" Orientation="Vertical" >
                             <TextBlock Margin="5, 5" Padding="3" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center">Select File</TextBlock>
-                            <ListBox Height="auto">
-                                <ListBoxItem>file1</ListBoxItem>
-                                <ListBoxItem>file2</ListBoxItem>
-                                <ListBoxItem>file3</ListBoxItem>
+                            <ListBox Name ="ListBox_FilesName" Height="auto" SelectionChanged="SelectItemEvent">
+                                
                             </ListBox>
                         </StackPanel>
                     </Border>
@@ -48,14 +46,14 @@
                             <StackPanel Grid.Row="0" Margin="3" Orientation="Horizontal">
                                 <Button Margin="5, 5" Padding="3" FontSize="13" >Update Current File</Button>
                                 <Button Margin="5, 5" Padding="3" FontSize="13" >Create New File</Button>
-                                <Button Margin="5, 5" Padding="3" FontSize="13" >Delete Current File</Button>
+                                <Button Name="Delete_Button" Margin="5, 5" Padding="3" FontSize="13" Click="Delete_Button_click"  >Delete Current File</Button>
                             </StackPanel>
                         </Border>
                         
                         <TextBlock Margin="5, 5" Padding="3" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center">Content of Selected file</TextBlock>
                         
                         <Border BorderBrush="Black" BorderThickness="1,1,1,1">
-                            <TextBox Name="TextBox_Content" Width="371" Margin="0" Padding="3" FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center" ></TextBox>
+                            <TextBox Name="ContentTextbox"></TextBox>
                         </Border>
                     </StackPanel>
                 </Grid>
