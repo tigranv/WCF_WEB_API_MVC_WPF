@@ -32,39 +32,48 @@ namespace WPF_Client_For_Api
 
         private async void Bt_Show_All_Files_Click(object sender, RoutedEventArgs e)
         {
+            
             if(files != null) files.Clear();
-            HttpClient client = new HttpClient();
-            string url = string.Format("http://localhost:60523/api/main?dirName={0}", Uri.EscapeDataString(Directory_Name_TextBox.Text));
+            if(Directory_Name_TextBox.Text != string.Empty && Directory_Name_TextBox.Text != null)
+            {
+                HttpClient client = new HttpClient();
+                string url = string.Format("http://localhost:60523/api/main?dirName={0}", Uri.EscapeDataString(Directory_Name_TextBox.Text));
 
-            await client.GetAsync(url)
-                .ContinueWith(response =>
-                {
-                if (response.Exception != null)
-                {
-                    MessageBox.Show(response.Exception.Message);
-                }
-                else
-                {
-                        HttpResponseMessage message = response.Result;
-                        string responseText = message.Content.ReadAsStringAsync().Result;
+                await client.GetAsync(url)
+                    .ContinueWith(response =>
+                    {
+                        if (response.Exception != null)
+                        {
+                            MessageBox.Show($"No Directory with Name {Directory_Name_TextBox.Text}");
+                        }
+                        else
+                        {
+                            HttpResponseMessage message = response.Result;
+                            string responseText = message.Content.ReadAsStringAsync().Result;
 
-                        JavaScriptSerializer jss = new JavaScriptSerializer();
-                        files = jss.Deserialize<ObservableCollection<string>>(responseText);
+                            JavaScriptSerializer jss = new JavaScriptSerializer();
+                            files = jss.Deserialize<ObservableCollection<string>>(responseText);
 
-                        Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-                            (Action)(() =>
-                            {
-                                
+                            Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                                (Action)(() =>
+                                {
 
-                                ListBox_FilesName.DataContext = files;
 
-                                Binding binding = new Binding();
-                                ListBox_FilesName.SetBinding(ItemsControl.ItemsSourceProperty, binding);
+                                    ListBox_FilesName.DataContext = files;
 
-                                (ListBox_FilesName.ItemsSource as ObservableCollection<string>).RemoveAt(0);
-                            }));
-                    }
-                });
+                                    Binding binding = new Binding();
+                                    ListBox_FilesName.SetBinding(ItemsControl.ItemsSourceProperty, binding);
+
+                                    (ListBox_FilesName.ItemsSource as ObservableCollection<string>).RemoveAt(0);
+                                }));
+                        }
+                    });
+            }
+            else
+            {
+                MessageBox.Show($"Please Enter Directory Name!!!");
+            }
+
         }
 
         private async void SelectItemEvent(object sender, SelectionChangedEventArgs e)
