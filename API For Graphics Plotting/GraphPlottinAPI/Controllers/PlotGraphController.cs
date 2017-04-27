@@ -18,7 +18,7 @@ namespace GraphPlottinAPI.Controllers
 
         public IHttpActionResult Post([FromUri]string function, [FromBody] RequestParameters param)
         {
-            //Thread.Sleep(5000);
+            Thread.Sleep(5000);
             CreateGraph = new GraphsCreator();
             List<Models.Point> XYList = new List<Models.Point>();
             XYList = CreateGraph.GetXY(function, param);
