@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Web.Script.Serialization;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
+using System.Net.Http.Formatting;
 
 namespace WPF_Client_For_Api
 {
@@ -115,6 +116,53 @@ namespace WPF_Client_For_Api
                 string url = $"http://localhost:60523/api/main?dirName={Directory_Name_TextBox.Text}&fileName={ListBox_FilesName.SelectedItem.ToString()}";
                 client.DeleteAsync(url);
                 if (files != null) files.RemoveAt(files.IndexOf(ListBox_FilesName.SelectedItem.ToString()));
+            }
+
+        }
+
+        
+
+        private async void Create_New_Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (ListBox_FilesName.SelectedItem != null && ContentTextbox.Text != null)
+            {
+                HttpClient client = new HttpClient();
+                string url = $"http://localhost:60523/api/main?dirName={Directory_Name_TextBox.Text}&fileName={ListBox_FilesName.SelectedItem.ToString()}";
+
+                await client.PutAsync(url, ContentTextbox.Text, new JsonMediaTypeFormatter())
+                    .ContinueWith(response =>
+                    {
+                        if (response.Exception != null)
+                        {
+                            MessageBox.Show(response.Exception.Message);
+                        }
+                        else
+                        {
+                            MessageBox.Show("File successfully updated");
+                        }
+                    });
+            }
+        }
+
+        private async void Update_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (ListBox_FilesName.SelectedItem != null && ContentTextbox.Text != null)
+            {
+                HttpClient client = new HttpClient();
+                string url = $"http://localhost:60523/api/main?dirName={Directory_Name_TextBox.Text}&fileName={ListBox_FilesName.SelectedItem.ToString()}";
+
+                await client.PutAsync(url, ContentTextbox.Text, new JsonMediaTypeFormatter())
+                    .ContinueWith(response =>
+                    {
+                        if (response.Exception != null)
+                        {
+                            MessageBox.Show(response.Exception.Message);
+                        }
+                        else
+                        {
+                            MessageBox.Show("File successfully updated");
+                        }
+                    });
             }
 
         }

@@ -44,8 +44,8 @@
                     <StackPanel Grid.Column="1" Orientation="Vertical">
                         <Border BorderBrush="Black" BorderThickness="0,0,0,2">
                             <StackPanel Grid.Row="0" Margin="3" Orientation="Horizontal">
-                                <Button Margin="5, 5" Padding="3" FontSize="13" >Update Current File</Button>
-                                <Button Margin="5, 5" Padding="3" FontSize="13" >Create New File</Button>
+                                <Button Margin="5, 5" Padding="3" FontSize="13" Click="Update_Button_Click" >Update Current File</Button>
+                                <Button Margin="5, 5" Padding="3" FontSize="13" Click="Create_New_Button_Click_1" >Create New File</Button>
                                 <Button Name="Delete_Button" Margin="5, 5" Padding="3" FontSize="13" Click="Delete_Button_click"  >Delete Current File</Button>
                             </StackPanel>
                         </Border>
@@ -53,7 +53,7 @@
                         <TextBlock Margin="5, 5" Padding="3" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center">Content of Selected file</TextBlock>
                         
                         <Border BorderBrush="Black" BorderThickness="1,1,1,1">
-                            <TextBox Name="ContentTextbox"></TextBox>
+                            <TextBox Name="ContentTextbox" TextWrapping="Wrap"></TextBox>
                         </Border>
                     </StackPanel>
                 </Grid>

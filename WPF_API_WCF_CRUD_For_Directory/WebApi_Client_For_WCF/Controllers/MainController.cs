@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Script.Serialization;
+
 
 namespace WebApi_Client_For_WCF.Controllers
 {
@@ -34,8 +36,13 @@ namespace WebApi_Client_For_WCF.Controllers
         }
 
         // POST: api/Main
-        public void Post([FromBody]string value)
+        public void Put([FromUri]string dirName, [FromUri]string fileName, [FromBody]string value)
         {
+            string p = Path.Combine("D:\\", dirName);
+            string path = Path.Combine(p, fileName);
+            StreamWriter sw = new StreamWriter(path);
+            sw.Write(value);
+            sw.Close();
         }
 
         // PUT: api/Main/5
