@@ -116,6 +116,7 @@ namespace WPF_Client_For_Api
                 string url = $"http://localhost:60523/api/main?dirName={Directory_Name_TextBox.Text}&fileName={ListBox_FilesName.SelectedItem.ToString()}";
                 client.DeleteAsync(url);
                 if (files != null) files.RemoveAt(files.IndexOf(ListBox_FilesName.SelectedItem.ToString()));
+                ContentTextbox.Text = null;
             }
 
         }
