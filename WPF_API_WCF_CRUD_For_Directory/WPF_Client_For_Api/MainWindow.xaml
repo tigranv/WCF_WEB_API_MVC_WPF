@@ -49,9 +49,16 @@
                                 <Button Name="Delete_Button" Margin="5, 5" Padding="3" FontSize="13" Click="Delete_Button_click"  >Delete Current File</Button>
                             </StackPanel>
                         </Border>
-                        
+                        <StackPanel Name="newfilePanal" Orientation="Horizontal" Visibility="Collapsed">
+                            <!---->
+                            <TextBlock Margin="5, 5" Padding="3" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center" >Name of new file</TextBlock>
+                            <TextBox Name ="NewFile_Name_TextBox"  Margin="5, 5" Padding="3" Width="180"></TextBox>
+                            <Button Margin="5, 5" Padding="3" FontSize="13" Click="Create_Button_Click" >Create</Button>
+
+                        </StackPanel>
                         <TextBlock Margin="5, 5" Padding="3" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center">Content of Selected file</TextBlock>
-                        
+
+
                         <Border BorderBrush="Black" BorderThickness="1,1,1,1">
                             <TextBox Name="ContentTextbox" TextWrapping="Wrap"></TextBox>
                         </Border>

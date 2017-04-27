@@ -35,7 +35,6 @@ namespace WebApi_Client_For_WCF.Controllers
             return textline;
         }
 
-        // POST: api/Main
         public void Put([FromUri]string dirName, [FromUri]string fileName, [FromBody]string value)
         {
             string p = Path.Combine("D:\\", dirName);
@@ -45,9 +44,13 @@ namespace WebApi_Client_For_WCF.Controllers
             sw.Close();
         }
 
-        // PUT: api/Main/5
-        public void Put(int id, [FromBody]string value)
+        public void Post([FromUri]string dirName, [FromUri]string fileName, [FromBody]string value)
         {
+            string p = Path.Combine("D:\\", dirName);
+            string path = Path.Combine(p, fileName);
+            StreamWriter sw = new StreamWriter(path);
+            sw.Write(value);
+            sw.Close();
         }
 
         // DELETE: api/Main/5

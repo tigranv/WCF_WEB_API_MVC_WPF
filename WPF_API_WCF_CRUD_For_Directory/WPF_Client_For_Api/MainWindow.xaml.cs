@@ -122,26 +122,12 @@ namespace WPF_Client_For_Api
 
         
 
-        private async void Create_New_Button_Click_1(object sender, RoutedEventArgs e)
+        private void Create_New_Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (ListBox_FilesName.SelectedItem != null && ContentTextbox.Text != null)
-            {
-                HttpClient client = new HttpClient();
-                string url = $"http://localhost:60523/api/main?dirName={Directory_Name_TextBox.Text}&fileName={ListBox_FilesName.SelectedItem.ToString()}";
+            if(newfilePanal.Visibility == Visibility.Collapsed)
+            newfilePanal.Visibility = Visibility.Visible;
+            ContentTextbox.Text = null;
 
-                await client.PutAsync(url, ContentTextbox.Text, new JsonMediaTypeFormatter())
-                    .ContinueWith(response =>
-                    {
-                        if (response.Exception != null)
-                        {
-                            MessageBox.Show(response.Exception.Message);
-                        }
-                        else
-                        {
-                            MessageBox.Show("File successfully updated");
-                        }
-                    });
-            }
         }
 
         private async void Update_Button_Click(object sender, RoutedEventArgs e)
@@ -165,6 +151,33 @@ namespace WPF_Client_For_Api
                     });
             }
 
+        }
+
+        
+
+        private async void Create_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (NewFile_Name_TextBox.Text != null && ContentTextbox.Text != null)
+            {
+                HttpClient client = new HttpClient();
+                string url = $"http://localhost:60523/api/main?dirName={Directory_Name_TextBox.Text}&fileName={NewFile_Name_TextBox.Text}";
+
+                await client.PostAsync(url, ContentTextbox.Text, new JsonMediaTypeFormatter())
+                    .ContinueWith(response =>
+                    {
+                        if (response.Exception != null)
+                        {
+                            MessageBox.Show(response.Exception.Message);
+                        }
+                        else
+                        {
+                            MessageBox.Show("File successfully created");
+                        }
+                    });
+            }
+            newfilePanal.Visibility = Visibility.Collapsed;
+            if (files != null) files.Add(NewFile_Name_TextBox.Text);
+            ContentTextbox.Text = null;
         }
     }
 }
