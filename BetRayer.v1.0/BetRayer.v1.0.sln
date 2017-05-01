@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceAssembly", "ServiceAssembly\ServiceAssembly.csproj", "{AE9DCEDA-B974-4B38-B155-27E13DE04BAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfHosting", "WpfHosting\WpfHosting.csproj", "{12850561-A0DE-411F-B583-BCB16065E8BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE9DCEDA-B974-4B38-B155-27E13DE04BAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE9DCEDA-B974-4B38-B155-27E13DE04BAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE9DCEDA-B974-4B38-B155-27E13DE04BAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE9DCEDA-B974-4B38-B155-27E13DE04BAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12850561-A0DE-411F-B583-BCB16065E8BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12850561-A0DE-411F-B583-BCB16065E8BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12850561-A0DE-411F-B583-BCB16065E8BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12850561-A0DE-411F-B583-BCB16065E8BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

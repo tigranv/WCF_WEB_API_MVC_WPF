@@ -1,0 +1,31 @@
+﻿<Window x:Class="WpfHosting.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfHosting"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+
+    <Grid.Background>
+    <LinearGradientBrush>
+    <GradientStop Color="LightSlateGray" Offset="0" />
+    <GradientStop Color="White" Offset="0.5" />
+    <GradientStop Color="LightSlateGray" Offset="0.9" />
+    </LinearGradientBrush>
+    </Grid.Background>
+
+    <Label Name="label1" Height="28" Width="67" Margin="10,93,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">Local IP:</Label>
+    <Label Name="label2" Height="28" Width="67" Margin="10,0,0,85" VerticalAlignment="Bottom" HorizontalAlignment="Left">Listen Port:</Label>
+    <TextBox Height="23" Margin="76,98,108,0" VerticalAlignment="Top" x:Name="textBoxIP" Text="localhost" />
+    <TextBox Height="23" Margin="76,0,108,88" VerticalAlignment="Bottom" x:Name="textBoxPort"  Text="7997" />
+        
+    <Button Height="23" Width="82" Margin="0,0,15,88" VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="buttonStop" Click="buttonStop_Click">Stop</Button>
+    <Button Height="23" Width="82" Margin="0,96,15,0" VerticalAlignment="Top" HorizontalAlignment="Right" x:Name="buttonStart" Click="buttonStart_Click">Start</Button>
+
+    <Label Height="28" Margin="10,0,15,45" VerticalAlignment="Bottom" x:Name="labelStatus">Status</Label>
+    <Label Height="37" Margin="10,18,15,0" HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="labelTitle"  FontSize="20" >Chat Service</Label>
+    
+    </Grid>
+</Window>
