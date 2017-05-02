@@ -1,8 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-namespace WpfHosting
+
+
+namespace WpfHost
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -36,6 +50,8 @@ namespace WpfHosting
 
             host = new ServiceHost(
                    typeof(ServiceAssembly.ChatService), baseAdresses);
+            host.Open();
+
 
 
             NetTcpBinding tcpBinding =
@@ -57,7 +73,7 @@ namespace WpfHosting
             //and configure ServiceThrottling as well
             ServiceThrottlingBehavior throttle;
             throttle =
-             host.Description.Behaviors.Find<ServiceThrottlingBehavior>();
+                     host.Description.Behaviors.Find<ServiceThrottlingBehavior>();
             if (throttle == null)
             {
                 throttle = new ServiceThrottlingBehavior();
@@ -75,7 +91,7 @@ namespace WpfHosting
                                        new TimeSpan(20, 0, 10);
 
             host.AddServiceEndpoint(typeof(ServiceAssembly.IChat),
-                                    tcpBinding, "tcp");
+                                                tcpBinding, "tcp");
 
             //Define Metadata endPoint, So we can 
             //publish information about the service
@@ -88,8 +104,6 @@ namespace WpfHosting
                 "net.tcp://" + textBoxIP.Text.ToString() + ":" +
                 (int.Parse(textBoxPort.Text.ToString()) - 1).ToString() +
                 "/WpfHosting/mex");
-
-
             try
             {
                 host.Open();
@@ -131,5 +145,6 @@ namespace WpfHosting
                 }
             }
         }
-    }
+
+    }  
 }
