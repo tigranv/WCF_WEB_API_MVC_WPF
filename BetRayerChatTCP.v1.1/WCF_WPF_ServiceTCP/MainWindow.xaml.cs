@@ -1,25 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace WCF_WPF_ServiceTCP
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public partial class MainWindow : Window, IMessage
     {
@@ -79,7 +64,6 @@ namespace WCF_WPF_ServiceTCP
         public void AddMessage(string message, string sender)
         {
             string messText = $"{sender} ---> {message}";
-            //ListOfOperations.Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { ListOfOperations.Text = $"New message - {message}"; }));
             subscribers.ForEach(delegate (IMessageCallback callback)
             {
                 if (((ICommunicationObject)callback).State == CommunicationState.Opened)

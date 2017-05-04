@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WCF_WPF_ServiceTCP
 {
@@ -14,8 +10,6 @@ namespace WCF_WPF_ServiceTCP
         void OnMessageAdded(string message, DateTime timestamp);
     }
 
-    //This is a little different than the client 
-    // in that we need to state the SessionMode as required or it will default to "notAllowed"
     [ServiceContract(CallbackContract = typeof(IMessageCallback), SessionMode = SessionMode.Required)]
     public interface IMessage
     {
@@ -24,8 +18,6 @@ namespace WCF_WPF_ServiceTCP
         [OperationContract]
         bool Subscribe();
         [OperationContract]
-        bool Unsubscribe();
-
- 
+        bool Unsubscribe(); 
     }
 }
