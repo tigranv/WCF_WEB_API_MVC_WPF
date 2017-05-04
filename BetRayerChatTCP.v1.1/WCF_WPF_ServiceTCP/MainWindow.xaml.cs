@@ -21,7 +21,7 @@ namespace WCF_WPF_ServiceTCP
             host = new ServiceHost(typeof(MainWindow), new Uri("net.tcp://localhost:7000"));
             host.AddServiceEndpoint(typeof(IMessage), new NetTcpBinding(), "ISubscribe");
             host.Open();
-            labelStatus.Content = "Connected to Port localhost:7000";
+            labelStatus.Content = "Connected to Port net.tcp://localhost:7000";
         }
 
         private void buttonStop_Click(object sender, RoutedEventArgs e)
