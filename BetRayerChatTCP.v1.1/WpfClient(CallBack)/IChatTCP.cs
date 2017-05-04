@@ -20,7 +20,7 @@ namespace WpfClient_CallBack_
     public interface IMessage
     {
         [OperationContract(IsOneWay = true)]
-        void AddMessage(string message);
+        void AddMessage(string message, string sender);
         [OperationContract]
         bool Subscribe();
         [OperationContract]

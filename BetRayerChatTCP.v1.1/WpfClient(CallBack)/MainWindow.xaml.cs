@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -22,9 +23,11 @@ namespace WpfClient_CallBack_
     public partial class MainWindow : Window, IMessageCallback, IDisposable
     {
         IMessage pipeProxy = null;
+        ObservableCollection<string> list;
         public MainWindow()
         {
             InitializeComponent();
+            list = new ObservableCollection<string>();
         }
 
         private void Bt_LogIn_Click(object sender, RoutedEventArgs e)
@@ -41,9 +44,13 @@ namespace WpfClient_CallBack_
 
         private void Bt_Send_Click(object sender, RoutedEventArgs e)
         {
+            //Dispatcher.Invoke(() => 
+            //{
+            //    rtbMessages.Text += txtUserName.Text + " : " + "\t" + messageTextbox.Text + "\n";
+            //});
             try
             {
-                pipeProxy.AddMessage(messageTextbox.Text);
+                pipeProxy.AddMessage(messageTextbox.Text, txtUserName.Text);
                 messageTextbox.Clear();
             }
             catch (Exception ex)
@@ -86,7 +93,10 @@ namespace WpfClient_CallBack_
         //This is the function that the SERVER will call
         public void OnMessageAdded(string message, DateTime timestamp)
         {
-            rtbMessages.Text = message + ": " + timestamp.ToString("hh:mm:ss") + "\n";
+            Dispatcher.Invoke(() =>
+            {
+                rtbMessages.Text+= message + ": " + timestamp.ToString("hh:mm:ss") + "\n";
+            });
         }
 
         //We need to tell the server that we are leaving

@@ -39,7 +39,7 @@
                     </Border>
                     <StackPanel Grid.Column="1" Margin="5" Orientation="Vertical">
                         <Border BorderBrush="Black" BorderThickness="1,1,1,1">
-                            <TextBox Name="rtbMessages" TextWrapping="Wrap" Width="300" HorizontalAlignment="Left" Height="200" Background="{x:Null}"/>
+                            <TextBlock Name="rtbMessages" AllowDrop="True" ForceCursor="False" TextWrapping="Wrap" Width="300" HorizontalAlignment="Left" Height="200" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                         </Border>
                         <StackPanel Margin="0 5 5 5" Grid.Column="1" Orientation="Horizontal">
                             <TextBox Background="#FFFFE5F9"  Name="messageTextbox" TextWrapping="Wrap" Height="50" Width="250"></TextBox>

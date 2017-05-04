@@ -76,14 +76,15 @@ namespace WCF_WPF_ServiceTCP
             }
         }
 
-        public void AddMessage(string message)
+        public void AddMessage(string message, string sender)
         {
+            string messText = $"{sender} ---> {message}";
             //ListOfOperations.Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { ListOfOperations.Text = $"New message - {message}"; }));
             subscribers.ForEach(delegate (IMessageCallback callback)
             {
                 if (((ICommunicationObject)callback).State == CommunicationState.Opened)
                 {
-                    callback.OnMessageAdded(message, DateTime.Now);
+                    callback.OnMessageAdded(messText, DateTime.Now);
                 }
                 else
                 {
