@@ -1,0 +1,53 @@
+﻿<Window x:Class="WpfClient_CallBack_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfClient_CallBack_"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="460">
+    <Border  BorderBrush="Black" BorderThickness="2">
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="C:\Users\Tigran PC\Desktop\1.jpg"/>
+            </Grid.Background>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*"  />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="3" Orientation="Horizontal" >
+                <TextBlock  Margin="5 5 5 5" Padding="3" FontSize="13" FontWeight="Bold" >Name</TextBlock>
+                <TextBox Background="#FFFFDEF6" Name ="txtUserName"  Margin="5, 5" Padding="3" Width="150"></TextBox>
+                <Button Background="#FFF065A4"  Name ="Bt_LogIn" Margin="5,5,5,0" Padding="3" FontSize="13" Height="24" VerticalAlignment="Top" Click="Bt_LogIn_Click"  >LogIn</Button>
+            </StackPanel>
+
+            <Border Grid.Row="1"  BorderBrush="Black" BorderThickness="2">
+                <Grid Grid.Row ="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="136*"/>
+                        <ColumnDefinition Width="367*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border BorderBrush="Black" BorderThickness="0,0,2,0">
+                        <StackPanel Grid.Column="0" Orientation="Vertical" >
+                            <TextBlock Margin="5, 5" Padding="3" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center">Online Users</TextBlock>
+                            <ListBox Name ="ListBox_OnlineUsers" Height="auto">
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Grid.Column="1" Margin="5" Orientation="Vertical">
+                        <Border BorderBrush="Black" BorderThickness="1,1,1,1">
+                            <TextBox Name="rtbMessages" TextWrapping="Wrap" Width="300" HorizontalAlignment="Left" Height="200" Background="{x:Null}"/>
+                        </Border>
+                        <StackPanel Margin="0 5 5 5" Grid.Column="1" Orientation="Horizontal">
+                            <TextBox Background="#FFFFE5F9"  Name="messageTextbox" TextWrapping="Wrap" Height="50" Width="250"></TextBox>
+                            <Button Background="#FFF065A4" Name ="Bt_Send" Margin="5" Padding="3" FontSize="13" VerticalAlignment="Center" Click="Bt_Send_Click" Width="50" Height="50"  >Send</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

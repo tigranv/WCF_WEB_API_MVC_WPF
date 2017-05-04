@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCF_WPF_ServiceTCP", "WCF_WPF_ServiceTCP\WCF_WPF_ServiceTCP.csproj", "{957FA05E-1D73-492D-BDA9-8AE5C44E3E21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfClient(CallBack)", "WpfClient(CallBack)\WpfClient(CallBack).csproj", "{278BB948-5D39-4810-83EF-3A67430CAD18}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{957FA05E-1D73-492D-BDA9-8AE5C44E3E21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{957FA05E-1D73-492D-BDA9-8AE5C44E3E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{957FA05E-1D73-492D-BDA9-8AE5C44E3E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{957FA05E-1D73-492D-BDA9-8AE5C44E3E21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{278BB948-5D39-4810-83EF-3A67430CAD18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{278BB948-5D39-4810-83EF-3A67430CAD18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{278BB948-5D39-4810-83EF-3A67430CAD18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{278BB948-5D39-4810-83EF-3A67430CAD18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
