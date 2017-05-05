@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Threading;
 
 namespace WpfClient_CallBack_
 {
@@ -17,7 +21,7 @@ namespace WpfClient_CallBack_
 
         private void Bt_LogIn_Click(object sender, RoutedEventArgs e)
         {
-            if (Connect() == true)
+            if (Connect())
             {
                 status.Text = $"{txtUserName.Text} is connected";
             }
@@ -49,11 +53,10 @@ namespace WpfClient_CallBack_
                       new InstanceContext(this),
                       new NetTcpBinding(),
                       new EndpointAddress("net.tcp://localhost:7000/ISubscribe"));
-
             try
             {
                 pipeProxy = pipeFactory.CreateChannel();
-                pipeProxy.Subscribe();
+                pipeProxy.Subscribe(txtUserName.Text);
                 return true;
             }
             catch (Exception e)
@@ -64,7 +67,7 @@ namespace WpfClient_CallBack_
         }
         public new void Close()
         {
-            pipeProxy.Unsubscribe();
+            pipeProxy.Unsubscribe(txtUserName.Text);
         }
 
 
@@ -78,8 +81,20 @@ namespace WpfClient_CallBack_
 
         public void Dispose()
         {
-            pipeProxy.Unsubscribe();
+            pipeProxy.Unsubscribe(txtUserName.Text);
         }
 
+        public void SendNames(List<string> names)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                (Action)(() =>
+                {
+                    ListBox_OnlineUsers.DataContext = names;
+                    Binding binding = new Binding();
+                    ListBox_OnlineUsers.SetBinding(ItemsControl.ItemsSourceProperty, binding);
+
+                    (ListBox_OnlineUsers.ItemsSource as ObservableCollection<string>).RemoveAt(0);
+                }));
+        }
     }
 }

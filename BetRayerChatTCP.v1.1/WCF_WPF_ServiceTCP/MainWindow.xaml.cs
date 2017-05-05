@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Windows;
+using LatinTo_ArmClassLibrary;
 
 namespace WCF_WPF_ServiceTCP
 {
@@ -9,6 +10,7 @@ namespace WCF_WPF_ServiceTCP
     public partial class MainWindow : Window, IMessage
     {
         private static List<IMessageCallback> subscribers = new List<IMessageCallback>();
+        private List<string> onlinesList = new List<string>();
         public ServiceHost host = null;
         public MainWindow()
         {
@@ -30,13 +32,28 @@ namespace WCF_WPF_ServiceTCP
             labelStatus.Content = "Disconnected";
         }
 
-        public bool Subscribe()
+        public bool Subscribe(string name)
         {
             try
             {
                 IMessageCallback callback = OperationContext.Current.GetCallbackChannel<IMessageCallback>();
                 if (!subscribers.Contains(callback))
+                {
                     subscribers.Add(callback);
+                    onlinesList.Add(name);
+
+                    subscribers.ForEach(delegate (IMessageCallback callback1)
+                    {
+                        if (((ICommunicationObject)callback1).State == CommunicationState.Opened)
+                        {
+                            callback1.SendNames(onlinesList);
+                        }
+                        else
+                        {
+                            subscribers.Remove(callback1);
+                        }
+                    });
+                } 
                 return true;
             }
             catch (Exception e)
@@ -46,13 +63,28 @@ namespace WCF_WPF_ServiceTCP
             }
         }
 
-        public bool Unsubscribe()
+        public bool Unsubscribe(string name)
         {
             try
             {
                 IMessageCallback callback = OperationContext.Current.GetCallbackChannel<IMessageCallback>();
                 if (subscribers.Contains(callback))
+                {
                     subscribers.Remove(callback);
+                    onlinesList.Remove(name);
+                    subscribers.ForEach(delegate (IMessageCallback callback1)
+                    {
+                        if (((ICommunicationObject)callback1).State == CommunicationState.Opened)
+                        {
+                            callback1.SendNames(onlinesList);
+                        }
+                        else
+                        {
+                            subscribers.Remove(callback1);
+                        }
+                    });
+                    
+                }
                 return true;
             }
             catch
@@ -63,7 +95,7 @@ namespace WCF_WPF_ServiceTCP
 
         public void AddMessage(string message, string sender)
         {
-            string messText = $"{sender} ---> {message}";
+            string messText = $"{sender} ---> {message.LatToArmConverter1()}";
             subscribers.ForEach(delegate (IMessageCallback callback)
             {
                 if (((ICommunicationObject)callback).State == CommunicationState.Opened)

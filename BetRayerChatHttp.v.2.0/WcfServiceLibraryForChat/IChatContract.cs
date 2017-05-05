@@ -25,7 +25,6 @@ namespace WcfServiceLibraryForChat
         [OperationContract]
         List<User> GetAllUsersAsync();
         [OperationContract]
-        
         void RemoveFromList(User users);
 
         // TODO: Add your service operations here

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 
 namespace WCF_WPF_ServiceTCP
@@ -8,6 +9,9 @@ namespace WCF_WPF_ServiceTCP
     {
         [OperationContract(IsOneWay = true)]
         void OnMessageAdded(string message, DateTime timestamp);
+
+        [OperationContract(IsOneWay = true)]
+        void SendNames(List<string> names);
     }
 
     [ServiceContract(CallbackContract = typeof(IMessageCallback), SessionMode = SessionMode.Required)]
@@ -16,8 +20,8 @@ namespace WCF_WPF_ServiceTCP
         [OperationContract(IsOneWay = true)]
         void AddMessage(string message, string sender);
         [OperationContract]
-        bool Subscribe();
+        bool Subscribe(string name);
         [OperationContract]
-        bool Unsubscribe(); 
+        bool Unsubscribe(string name); 
     }
 }
