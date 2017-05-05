@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using System.Windows;
 using LatinTo_ArmClassLibrary;
+using System.Threading.Tasks;
 
 namespace WCF_WPF_ServiceTCP
 {
@@ -10,7 +11,7 @@ namespace WCF_WPF_ServiceTCP
     public partial class MainWindow : Window, IMessage
     {
         private static List<IMessageCallback> subscribers = new List<IMessageCallback>();
-        private List<string> onlinesList = new List<string>();
+        private static List<string> onlinesList = new List<string>();
         public ServiceHost host = null;
         public MainWindow()
         {
@@ -42,18 +43,18 @@ namespace WCF_WPF_ServiceTCP
                     subscribers.Add(callback);
                     onlinesList.Add(name);
 
-                    subscribers.ForEach(delegate (IMessageCallback callback1)
-                    {
-                        if (((ICommunicationObject)callback1).State == CommunicationState.Opened)
-                        {
-                            callback1.SendNames(onlinesList);
-                        }
-                        else
-                        {
-                            subscribers.Remove(callback1);
-                        }
-                    });
-                } 
+                    //foreach(var callback1 in subscribers)
+                    //{
+                    //    if (((ICommunicationObject)callback1).State == CommunicationState.Opened)
+                    //    {
+                    //        callback1.SendNames(onlinesList);
+                    //    }
+                    //    else
+                    //    {
+                    //        subscribers.Remove(callback1);
+                    //    }
+                    //}
+                }
                 return true;
             }
             catch (Exception e)

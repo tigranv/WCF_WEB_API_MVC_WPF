@@ -8,9 +8,9 @@
         Title="MainWindow" Height="350" Width="460">
     <Border  BorderBrush="Black" BorderThickness="2">
         <Grid>
-            <Grid.Background>
+            <!-- <Grid.Background>
                 <ImageBrush ImageSource="C:\Users\Tigran PC\Source\Repos\ASP.NET_WEB_API-_MVC_WPF\BetRayerChatTCP.v1.1\1.jpg"/>
-            </Grid.Background>
+            </Grid.Background>-->
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />

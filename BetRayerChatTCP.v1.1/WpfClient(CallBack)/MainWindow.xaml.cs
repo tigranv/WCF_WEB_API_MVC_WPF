@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -84,9 +85,9 @@ namespace WpfClient_CallBack_
             pipeProxy.Unsubscribe(txtUserName.Text);
         }
 
-        public void SendNames(List<string> names)
+        public async void SendNames(List<string> names)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+            await Dispatcher.BeginInvoke(DispatcherPriority.Normal,
                 (Action)(() =>
                 {
                     ListBox_OnlineUsers.DataContext = names;
