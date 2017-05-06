@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
@@ -13,24 +14,37 @@ namespace WpfClient_CallBack_
     public partial class MainWindow : Window, IMessageCallback, IDisposable
     {
         IMessage pipeProxy = null;
-        ObservableCollection<string> list;
+        bool flag = false;
         public MainWindow()
         {
             InitializeComponent();
-            list = new ObservableCollection<string>();
         }
 
         private void Bt_LogIn_Click(object sender, RoutedEventArgs e)
         {
-            if (Connect())
+            if (!flag)
             {
-                status.Text = $"{txtUserName.Text} is connected";
-                pipeProxy.SendOnlineUsers();
+                if (Connect())
+                {
+                    status.Text = $"{txtUserName.Text} is connected";
+                    pipeProxy.SendOnlineUsers();
+                    flag = true;
+                    Bt_LogIn.Content = "Log Out";
+                }
+                else
+                {
+                    MessageBox.Show("Error");
+                }
             }
             else
             {
-                MessageBox.Show("Error");
-            }
+                status.Text = $"Disconnected";
+                flag = false;
+                Bt_LogIn.Content = "Log In";
+                ListBox_OnlineUsers.ItemsSource = null;
+                pipeProxy.Unsubscribe(txtUserName.Text);
+                pipeProxy.SendOnlineUsers();
+            }   
         }
 
         private void Bt_Send_Click(object sender, RoutedEventArgs e)
@@ -44,8 +58,6 @@ namespace WpfClient_CallBack_
             {
                 MessageBox.Show(ex.Message);
             }
-
-
         }
         public bool Connect()
         {
@@ -67,13 +79,7 @@ namespace WpfClient_CallBack_
                 return false;
             }
         }
-        public new void Close()
-        {
-            pipeProxy.Unsubscribe(txtUserName.Text);
-            pipeProxy.SendOnlineUsers();
-        }
-
-
+      
         public void OnMessageAdded(string message, DateTime timestamp)
         {
             Dispatcher.Invoke(() =>
@@ -87,14 +93,16 @@ namespace WpfClient_CallBack_
             Dispatcher.BeginInvoke(DispatcherPriority.Normal,
                 (Action)(() =>
                 {
-
                     ListBox_OnlineUsers.DataContext = names;
                     Binding binding = new Binding();
                     ListBox_OnlineUsers.SetBinding(ItemsControl.ItemsSourceProperty, binding);
-
-                    (ListBox_OnlineUsers.ItemsSource as ObservableCollection<string>).RemoveAt(0);
                 }));
+        }
 
+        private void ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            pipeProxy.Unsubscribe(txtUserName.Text);
+            pipeProxy.SendOnlineUsers();
         }
 
         public void Dispose()
@@ -102,11 +110,5 @@ namespace WpfClient_CallBack_
             pipeProxy.Unsubscribe(txtUserName.Text);
             pipeProxy.SendOnlineUsers();
         }
-
-        //private void ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
-        //{
-        //    pipeProxy.Unsubscribe(txtUserName.Text);
-        //    pipeProxy.SendOnlineUsers();
-        //}
     }
 }

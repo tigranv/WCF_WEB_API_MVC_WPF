@@ -5,6 +5,7 @@ using System.Windows;
 using LatinTo_ArmClassLibrary;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using ServiceClassLibrary;
 
 namespace WCF_WPF_ServiceTCP
 {
