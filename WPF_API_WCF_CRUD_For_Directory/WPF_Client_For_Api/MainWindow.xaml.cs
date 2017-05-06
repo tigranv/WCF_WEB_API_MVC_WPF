@@ -64,8 +64,6 @@ namespace WPF_Client_For_Api
 
                                     Binding binding = new Binding();
                                     ListBox_FilesName.SetBinding(ItemsControl.ItemsSourceProperty, binding);
-
-                                    (ListBox_FilesName.ItemsSource as ObservableCollection<string>).RemoveAt(0);
                                 }));
                         }
                     });
