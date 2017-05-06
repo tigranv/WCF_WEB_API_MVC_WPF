@@ -25,6 +25,7 @@ namespace WpfClient_CallBack_
             if (Connect())
             {
                 status.Text = $"{txtUserName.Text} is connected";
+                pipeProxy.SendOnlineUsers();
             }
             else
             {
@@ -69,6 +70,7 @@ namespace WpfClient_CallBack_
         public new void Close()
         {
             pipeProxy.Unsubscribe(txtUserName.Text);
+            pipeProxy.SendOnlineUsers();
         }
 
 
@@ -78,24 +80,33 @@ namespace WpfClient_CallBack_
             {
                 rtbMessages.Text+= message + ": " + timestamp.ToString("hh:mm:ss") + "\n";
             });
-        }
+        }        
 
-        public void Dispose()
+        public void SendNames(ObservableCollection<string> names)
         {
-            pipeProxy.Unsubscribe(txtUserName.Text);
-        }
-
-        public async void SendNames(List<string> names)
-        {
-            await Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal,
                 (Action)(() =>
                 {
+
                     ListBox_OnlineUsers.DataContext = names;
                     Binding binding = new Binding();
                     ListBox_OnlineUsers.SetBinding(ItemsControl.ItemsSourceProperty, binding);
 
                     (ListBox_OnlineUsers.ItemsSource as ObservableCollection<string>).RemoveAt(0);
                 }));
+
         }
+
+        public void Dispose()
+        {
+            pipeProxy.Unsubscribe(txtUserName.Text);
+            pipeProxy.SendOnlineUsers();
+        }
+
+        //private void ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
+        //{
+        //    pipeProxy.Unsubscribe(txtUserName.Text);
+        //    pipeProxy.SendOnlineUsers();
+        //}
     }
 }

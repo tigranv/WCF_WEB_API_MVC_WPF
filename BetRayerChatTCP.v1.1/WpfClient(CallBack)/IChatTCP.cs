@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace WpfClient_CallBack_
         void OnMessageAdded(string message, DateTime timestamp);
 
         [OperationContract(IsOneWay = true)]
-        void SendNames(List<string> names);
+        void SendNames(ObservableCollection<string> names);
     }
 
     [ServiceContract(CallbackContract = typeof(IMessageCallback), SessionMode = SessionMode.Required)]
@@ -24,5 +25,8 @@ namespace WpfClient_CallBack_
         bool Subscribe(string name);
         [OperationContract]
         bool Unsubscribe(string name);
+
+        [OperationContract(IsOneWay = true)]
+        void SendOnlineUsers();
     }
 }
