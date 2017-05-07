@@ -38,10 +38,15 @@
                             <TextBlock Margin="5, 5" Padding="3" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center">Online Users</TextBlock>
                             <ListBox Name ="ListBox_OnlineUsers" Height="auto" BorderThickness="2" BorderBrush="#FF0CB3F1" MouseDoubleClick="PM_ChatClick">
                             </ListBox>
+                            <Grid Name="newMesGrid" Margin="10" Visibility="Collapsed">
+                                <Border BorderBrush="Red" BorderThickness="4" CornerRadius="10">
+                                    <Label Name="PrivateLable" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14">New PM</Label>
+                                </Border>
+                            </Grid>
                         </StackPanel>
                     </Border>
                     <StackPanel Grid.Column="1" Margin="5" Orientation="Vertical">
-                        <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="15">
+                        <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="8">
                             <TextBlock Name="rtbMessages" AllowDrop="True" ForceCursor="False" TextWrapping="Wrap" Width="425" HorizontalAlignment="Left" Height="200" ScrollViewer.CanContentScroll="True" Background="{x:Null}" FontWeight="Bold" FontSize="13"/>
                         </Border>
                         

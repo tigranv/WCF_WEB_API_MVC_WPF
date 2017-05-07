@@ -21,8 +21,6 @@
             <Button Height="30" Width="80" Margin="5"  HorizontalAlignment="Center" x:Name="buttonStart" Click="buttonStart_Click" Background="#FF52C332" FontWeight="Bold" FontSize="14">START</Button>
             <Label Height="28" Margin="10,0,15,45" VerticalAlignment="Bottom" x:Name="labelStatus">Status</Label>
         </StackPanel>
-
-
-
+        
     </Grid>
 </Window>

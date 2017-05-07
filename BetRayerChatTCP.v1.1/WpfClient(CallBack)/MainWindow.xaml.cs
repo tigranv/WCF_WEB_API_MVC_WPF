@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -151,6 +151,8 @@ namespace WpfClient_CallBack_
 
         private void PM_ChatClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (ListBox_OnlineUsers.SelectedItem.ToString() == txtUserName.Text) return;
+
             if (!rooms.ContainsKey(ListBox_OnlineUsers.SelectedItem.ToString()))
             {
                 PrivateMessWindow win2 = new PrivateMessWindow(txtUserName.Text, ListBox_OnlineUsers.SelectedItem.ToString());
@@ -174,9 +176,14 @@ namespace WpfClient_CallBack_
 
             Dispatcher.Invoke(() =>
             {
+                ListBox_OnlineUsers.SelectedItem = sender;
+                newMesGrid.Visibility = Visibility.Visible;
                 rooms[sender].PrivatertbMessages.Text += $"{sender} ---> {message + ": " + DateTime.Now.ToString("hh:mm:ss")}" + "\n";
             });
+              
             rooms[sender].Show();
+            Thread.Sleep(500);
+            newMesGrid.Visibility = Visibility.Collapsed;
         }
     }
 }
