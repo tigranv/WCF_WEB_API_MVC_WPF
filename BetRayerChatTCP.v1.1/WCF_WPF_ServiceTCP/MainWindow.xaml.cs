@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using System.Windows;
 using LatinTo_ArmClassLibrary;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using ServiceClassLibrary;
+using System.Windows.Media;
 
 namespace WCF_WPF_ServiceTCP
 {
@@ -15,7 +15,9 @@ namespace WCF_WPF_ServiceTCP
         private static Dictionary<string, IMessageCallback> subscribers = new Dictionary<string, IMessageCallback>();
         private static ObservableCollection<string> onlinesList = new ObservableCollection<string>();
         public ServiceHost host = null;
+        bool flag = false;
         object syncObj = new object();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -24,16 +26,24 @@ namespace WCF_WPF_ServiceTCP
 
         private void buttonStart_Click(object sender, RoutedEventArgs e)
         {
-            host = new ServiceHost(typeof(MainWindow), new Uri("net.tcp://localhost:7000"));
-            host.AddServiceEndpoint(typeof(IMessage), new NetTcpBinding(), "ISubscribe");
-            host.Open();
-            labelStatus.Content = "Connected to Port net.tcp://localhost:7000";
-        }
-
-        private void buttonStop_Click(object sender, RoutedEventArgs e)
-        {
-            host.Close();
-            labelStatus.Content = "Disconnected";
+            if (!flag)
+            {
+                host = new ServiceHost(typeof(MainWindow), new Uri("net.tcp://localhost:7000"));
+                host.AddServiceEndpoint(typeof(IMessage), new NetTcpBinding(), "ISubscribe");
+                host.Open();
+                buttonStart.Content = "STOP";
+                buttonStart.Background = Brushes.Red;
+                labelStatus.Content = "Connected to Port net.tcp://localhost:7000";
+                flag = true;   
+            }
+            else
+            {
+                host.Close();
+                labelStatus.Content = "Disconnected";
+                buttonStart.Background = Brushes.ForestGreen;
+                buttonStart.Content = "START";
+                flag = false;  
+            }
         }
 
         public bool Subscribe(string name)
@@ -75,7 +85,6 @@ namespace WCF_WPF_ServiceTCP
                 }
             }
             return false;
-
 
             //try
             //{
@@ -156,6 +165,13 @@ namespace WCF_WPF_ServiceTCP
             string messText = $"{sender} ---> {message}";
 
             subscribers[reciver].OnPrivateMessageAdded(messText, sender, DateTime.Now);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            Application.Current.Shutdown();
         }
     }
 }
