@@ -13,6 +13,8 @@ namespace ServiceClassLibrary
     {
         [OperationContract(IsOneWay = true)]
         void OnMessageAdded(string message, DateTime timestamp);
+        [OperationContract(IsOneWay = true)]
+        void OnPrivateMessageAdded(string message, string sender, DateTime timestamp);
 
         [OperationContract(IsOneWay = true)]
         void SendNames(ObservableCollection<string> names);
@@ -23,6 +25,8 @@ namespace ServiceClassLibrary
     {
         [OperationContract(IsOneWay = true)]
         void AddMessage(string message, string sender, bool convMode);
+        [OperationContract(IsOneWay = true)]
+        void AddPrivateMessage(string message, string sender, string reciver);
         [OperationContract]
         bool Subscribe(string name);
         [OperationContract]

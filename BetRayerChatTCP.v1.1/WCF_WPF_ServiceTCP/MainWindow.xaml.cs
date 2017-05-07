@@ -12,9 +12,10 @@ namespace WCF_WPF_ServiceTCP
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public partial class MainWindow : Window, IMessage
     {
-        private static List<IMessageCallback> subscribers = new List<IMessageCallback>();
+        private static Dictionary<string, IMessageCallback> subscribers = new Dictionary<string, IMessageCallback>();
         private static ObservableCollection<string> onlinesList = new ObservableCollection<string>();
         public ServiceHost host = null;
+        object syncObj = new object();
         public MainWindow()
         {
             InitializeComponent();
@@ -40,10 +41,10 @@ namespace WCF_WPF_ServiceTCP
             try
             {
                 IMessageCallback callback = OperationContext.Current.GetCallbackChannel<IMessageCallback>();
-                if (!subscribers.Contains(callback))
+                if (!subscribers.ContainsKey(name) && !subscribers.ContainsValue(callback))
                 {
-                    subscribers.Add(callback);
-                    onlinesList.Add(name);                   
+                    subscribers.Add(name, callback);
+                    onlinesList.Add(name);
                 }
                 return true;
             }
@@ -54,53 +55,112 @@ namespace WCF_WPF_ServiceTCP
             }
         }
 
+
         public bool Unsubscribe(string name)
         {
-            try
+            foreach (string c in subscribers.Keys)
             {
-                IMessageCallback callback = OperationContext.Current.GetCallbackChannel<IMessageCallback>();
-                if (subscribers.Contains(callback))
+                if (name == c)
                 {
-                    subscribers.Remove(callback);
-                    onlinesList.Remove(name);     
+                    lock (syncObj)
+                    {
+                        subscribers.Remove(name);
+                        onlinesList.Remove(name);
+                        foreach (IMessageCallback callback in subscribers.Values)
+                        {
+                            callback.SendNames(onlinesList);
+                        }
+                    }
+                    return true;
                 }
-                return true;
             }
-            catch
-            {
-                return false;
-            }
+            return false;
+
+
+            //try
+            //{
+            //    IMessageCallback callback = OperationContext.Current.GetCallbackChannel<IMessageCallback>();
+            //    if (!subscribers.ContainsKey(name) && !subscribers.ContainsValue(callback))
+            //    {
+            //        subscribers.Remove(name);
+            //        onlinesList.Remove(name);     
+            //    }
+            //    return true;
+            //}
+            //catch
+            //{
+            //    return false;
+            //}
         }
 
         public void AddMessage(string message, string sender, bool convMode)
         {
             string messText = convMode?$"{sender} ---> {message.LatToArmConverter1()}": $"{sender} ---> {message}";
-            subscribers.ForEach(delegate (IMessageCallback callback)
+
+            foreach (var item in subscribers)
             {
-                if (((ICommunicationObject)callback).State == CommunicationState.Opened)
+                if (((ICommunicationObject)item.Value).State == CommunicationState.Opened)
                 {
-                    callback.OnMessageAdded(messText, DateTime.Now);
+                    item.Value.OnMessageAdded(messText, DateTime.Now);
                 }
                 else
                 {
-                    subscribers.Remove(callback);
+                    subscribers.Remove(item.Key);
                 }
-            });    
+            }
+
+            // old code asunc foreach
+            //subscribers.ForEach(delegate (IMessageCallback callback)
+            //{
+            //    if (((ICommunicationObject)callback).State == CommunicationState.Opened)
+            //    {
+            //        callback.OnMessageAdded(messText, DateTime.Now);
+            //    }
+            //    else
+            //    {
+            //        subscribers.Remove(callback);
+            //    }
+            //});    
         }
 
         public void SendOnlineUsers()
         {
-            subscribers.ForEach(delegate (IMessageCallback callback)
+            foreach (var item in subscribers)
             {
-                if (((ICommunicationObject)callback).State == CommunicationState.Opened)
+                if (((ICommunicationObject)item.Value).State == CommunicationState.Opened)
                 {
-                    callback.SendNames(onlinesList);
+                    item.Value.SendNames(onlinesList);
                 }
                 else
                 {
-                    subscribers.Remove(callback);
+                    subscribers.Remove(item.Key);
                 }
-            });
-        }   
+            }
+
+            // for old code
+            //subscribers.ForEach(delegate (IMessageCallback callback)
+            //{
+            //    if (((ICommunicationObject)callback).State == CommunicationState.Opened)
+            //    {
+            //        callback.SendNames(onlinesList);
+            //    }
+            //    else
+            //    {
+            //        subscribers.Remove(callback);
+            //    }
+            //});
+        }
+
+        public void AddPrivateMessage(string message, string sender, string reciver)
+        {
+            if(message == null || sender == null || reciver == null) MessageBox.Show("error");
+
+            string messText = $"{sender} ---> {message}";
+
+            subscribers[reciver].OnPrivateMessageAdded(messText, sender, DateTime.Now);
+
+            MessageBox.Show("serverrecived yor private MessageBox and sented to client");
+
+        }
     }
 }

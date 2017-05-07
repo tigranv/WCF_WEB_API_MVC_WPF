@@ -13,8 +13,11 @@ namespace WpfClient_CallBack_
 {
     public partial class MainWindow : Window, IMessageCallback, IDisposable
     {
-        IMessage pipeProxy = null;
+        public static IMessage pipeProxy = null;
+        Dictionary<string, PrivateMessWindow> rooms = new Dictionary<string, PrivateMessWindow>();
         bool flag = false;
+        private bool JustChecked;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -43,7 +46,6 @@ namespace WpfClient_CallBack_
                 Bt_LogIn.Content = "Log In";
                 ListBox_OnlineUsers.ItemsSource = null;
                 pipeProxy.Unsubscribe(txtUserName.Text);
-                pipeProxy.SendOnlineUsers();
             }   
         }
 
@@ -60,6 +62,7 @@ namespace WpfClient_CallBack_
                 MessageBox.Show(ex.Message);
             }
         }
+
         public bool Connect()
         {
             
@@ -100,8 +103,6 @@ namespace WpfClient_CallBack_
                 }));
         }
 
-        private bool JustChecked;
-
         private void RB_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton s = (RadioButton)sender;
@@ -125,7 +126,6 @@ namespace WpfClient_CallBack_
             if(pipeProxy != null)
             {
                 pipeProxy.Unsubscribe(txtUserName.Text);
-                pipeProxy.SendOnlineUsers();
             }      
         }
 
@@ -134,13 +134,37 @@ namespace WpfClient_CallBack_
             if (pipeProxy != null)
             {
                 pipeProxy.Unsubscribe(txtUserName.Text);
-                pipeProxy.SendOnlineUsers();
             }
         }
 
         private void PM_ChatClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // add logic for private chatting
+            if (!rooms.ContainsKey(ListBox_OnlineUsers.SelectedItem.ToString()))
+            {
+                PrivateMessWindow win2 = new PrivateMessWindow(txtUserName.Text, ListBox_OnlineUsers.SelectedItem.ToString());
+                rooms.Add(ListBox_OnlineUsers.SelectedItem.ToString(), win2);
+                win2.Show();
+            }
+            else
+            {
+                rooms[ListBox_OnlineUsers.SelectedItem.ToString()].Show();
+            }
+            
+        }
+
+        public void OnPrivateMessageAdded(string message, string sender, DateTime timestamp)
+        {
+            if (!rooms.ContainsKey(sender))
+            {
+                PrivateMessWindow win2 = new PrivateMessWindow(txtUserName.Text, sender);
+                rooms.Add(sender, win2);
+            }
+
+            Dispatcher.Invoke(() =>
+            {
+                rooms[sender].PrivatertbMessages.Text += $"{sender} ---> {message + ": " + DateTime.Now.ToString("hh:mm:ss")}" + "\n";
+            });
+            rooms[sender].Show();
         }
     }
 }
