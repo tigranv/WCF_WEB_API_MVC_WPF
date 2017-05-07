@@ -14,7 +14,7 @@ namespace WpfClient_CallBack_
     public partial class MainWindow : Window, IMessageCallback, IDisposable
     {
         public static IMessage pipeProxy = null;
-        Dictionary<string, PrivateMessWindow> rooms = new Dictionary<string, PrivateMessWindow>();
+        public static Dictionary<string, PrivateMessWindow> rooms = new Dictionary<string, PrivateMessWindow>();
         bool flag = false;
         private bool JustChecked;
 
@@ -41,6 +41,10 @@ namespace WpfClient_CallBack_
             }
             else
             {
+                foreach (var item in rooms)
+                {
+                    item.Value.Close();
+                }
                 status.Text = $"Disconnected";
                 flag = false;
                 Bt_LogIn.Content = "Log In";
@@ -123,6 +127,10 @@ namespace WpfClient_CallBack_
 
         private void ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            foreach (var item in rooms)
+            {
+                item.Value.Close();
+            }
             if(pipeProxy != null)
             {
                 pipeProxy.Unsubscribe(txtUserName.Text);
@@ -131,6 +139,10 @@ namespace WpfClient_CallBack_
 
         public void Dispose()
         {
+            foreach (var item in rooms)
+            {
+                item.Value.Close();
+            }
             if (pipeProxy != null)
             {
                 pipeProxy.Unsubscribe(txtUserName.Text);

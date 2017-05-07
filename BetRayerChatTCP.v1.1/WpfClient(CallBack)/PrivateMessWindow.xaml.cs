@@ -1,26 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WpfClient_CallBack_
 {
-    /// <summary>
-    /// Interaction logic for PrivateMessWindow.xaml
-    /// </summary>
+
     public partial class PrivateMessWindow : Window
     {
-        string senderName;
-        string reciverName;
+        static string senderName;
+        static string reciverName;
+
         public PrivateMessWindow()
         {
             InitializeComponent();
@@ -31,6 +19,7 @@ namespace WpfClient_CallBack_
             InitializeComponent();
             senderName = sender;
             reciverName = reciver;
+            NameOfUser.Text = reciver;
         }
 
         private void Bt_Send_Click(object sender, RoutedEventArgs e)
@@ -48,6 +37,11 @@ namespace WpfClient_CallBack_
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MainWindow.rooms.Remove(reciverName);
         }
     }
 }

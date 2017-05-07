@@ -153,14 +153,9 @@ namespace WCF_WPF_ServiceTCP
 
         public void AddPrivateMessage(string message, string sender, string reciver)
         {
-            if(message == null || sender == null || reciver == null) MessageBox.Show("error");
-
             string messText = $"{sender} ---> {message}";
 
             subscribers[reciver].OnPrivateMessageAdded(messText, sender, DateTime.Now);
-
-            MessageBox.Show("serverrecived yor private MessageBox and sented to client");
-
         }
     }
 }
