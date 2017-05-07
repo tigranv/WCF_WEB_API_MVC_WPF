@@ -49,9 +49,10 @@ namespace WpfClient_CallBack_
 
         private void Bt_Send_Click(object sender, RoutedEventArgs e)
         {
+            bool converterMode = (bool)RadioBtnConverter.IsChecked;
             try
             {
-                pipeProxy.AddMessage(messageTextbox.Text, txtUserName.Text);
+                pipeProxy.AddMessage(messageTextbox.Text, txtUserName.Text, converterMode);
                 messageTextbox.Clear();
             }
             catch (Exception ex)
@@ -99,16 +100,47 @@ namespace WpfClient_CallBack_
                 }));
         }
 
+        private bool JustChecked;
+
+        private void RB_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton s = (RadioButton)sender;
+            JustChecked = true;
+        }
+        private void RB_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (JustChecked)
+            {
+                JustChecked = false;
+                e.Handled = true;
+                return;
+            }
+            RadioButton s = (RadioButton)sender;
+            if ((bool)RadioBtnConverter.IsChecked)
+                s.IsChecked = false;
+        }
+
         private void ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            pipeProxy.Unsubscribe(txtUserName.Text);
-            pipeProxy.SendOnlineUsers();
+            if(pipeProxy != null)
+            {
+                pipeProxy.Unsubscribe(txtUserName.Text);
+                pipeProxy.SendOnlineUsers();
+            }      
         }
 
         public void Dispose()
         {
-            pipeProxy.Unsubscribe(txtUserName.Text);
-            pipeProxy.SendOnlineUsers();
+            if (pipeProxy != null)
+            {
+                pipeProxy.Unsubscribe(txtUserName.Text);
+                pipeProxy.SendOnlineUsers();
+            }
+        }
+
+        private void PM_ChatClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // add logic for private chatting
         }
     }
 }

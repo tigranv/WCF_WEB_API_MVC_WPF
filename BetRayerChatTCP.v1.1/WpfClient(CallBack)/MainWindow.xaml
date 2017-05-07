@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfClient_CallBack_"
         mc:Ignorable="d"
+        MaxHeight="500" MaxWidth="800" MinHeight="350" MinWidth="600"
         Title="MainWindow" Height="350" Width="600" Closing="ClosingEvent">
     <Border  BorderBrush="Black" BorderThickness="2">
         <Grid>
@@ -21,7 +22,7 @@
                 <TextBlock  Margin="0 0  5 0" Padding="6" FontSize="16" FontWeight="Bold" Background="White" FontFamily="Showcard Gothic" Foreground="#FF17B7F1" RenderTransformOrigin="0.5,0.5" TextDecorations="{x:Null}" TextAlignment="Justify" >BetraYer Chat</TextBlock>
                 <TextBlock  Margin="5 5 5 5" Padding="3" FontSize="13" FontWeight="Bold" >Name</TextBlock>
                 <TextBox Background="White" Name ="txtUserName"  Margin="5, 5" Padding="3" Width="150"></TextBox>
-                <Button Background="#FF85CB11"  Name ="Bt_LogIn" Margin="5,5,5,0" Padding="3" Height="24" Click="Bt_LogIn_Click" VerticalAlignment="Top"  >LogIn</Button>
+                <Button Background="#FF85CB11"  Name ="Bt_LogIn" Margin="5,5,5,0" Padding="3" Height="24" Click="Bt_LogIn_Click" VerticalAlignment="Top" FontWeight="Bold"  >LogIn</Button>
                 <TextBlock Name="status" Margin="15 5 5 5" Padding="3" FontSize="13" FontWeight="Bold" >Disconnected</TextBlock>
             </StackPanel>
 
@@ -35,18 +36,19 @@
                     <Border BorderBrush="Black" BorderThickness="0,0,2,0">
                         <StackPanel Grid.Column="0" Orientation="Vertical" >
                             <TextBlock Margin="5, 5" Padding="3" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center">Online Users</TextBlock>
-                            <ListBox Name ="ListBox_OnlineUsers" Height="auto">
+                            <ListBox Name ="ListBox_OnlineUsers" Height="auto" BorderThickness="2" BorderBrush="#FF0CB3F1" MouseDoubleClick="PM_ChatClick">
                             </ListBox>
                         </StackPanel>
                     </Border>
                     <StackPanel Grid.Column="1" Margin="5" Orientation="Vertical">
                         <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="15">
-                            <TextBlock Name="rtbMessages" AllowDrop="True" ForceCursor="False" TextWrapping="Wrap" Width="300" HorizontalAlignment="Left" Height="200" ScrollViewer.CanContentScroll="True" Background="{x:Null}" FontWeight="Bold" FontSize="13"/>
+                            <TextBlock Name="rtbMessages" AllowDrop="True" ForceCursor="False" TextWrapping="Wrap" Width="425" HorizontalAlignment="Left" Height="200" ScrollViewer.CanContentScroll="True" Background="{x:Null}" FontWeight="Bold" FontSize="13"/>
                         </Border>
                         
                         <StackPanel Margin="0 5 5 5" Grid.Column="1" Orientation="Horizontal" >
-                                <TextBox Background="White"  Name="messageTextbox" TextWrapping="Wrap" Height="50" Width="250"></TextBox>
-                            <Button Background="#FF85CB11" Name ="Bt_Send"  Margin="5" Padding="3" FontSize="13" VerticalAlignment="Center" Click="Bt_Send_Click" Width="50" Height="50"  >Send</Button>
+                                <TextBox Background="White"  Name="messageTextbox" TextWrapping="Wrap" Height="55" Width="250" BorderBrush="#FF85CB11" BorderThickness="2"></TextBox>
+                            <Button Background="#FF85CB11" Name ="Bt_Send"  Margin="5" Padding="3" FontSize="13" VerticalAlignment="Center" Click="Bt_Send_Click" Width="50" Height="40" FontWeight="Bold"  >Send</Button>
+                            <RadioButton Name="RadioBtnConverter" Click="RB_Clicked" Checked="RB_Checked" Margin="5,5,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" BorderBrush="#FF85CB11" BorderThickness="3">Convert To Arm</RadioButton>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

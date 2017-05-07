@@ -22,7 +22,7 @@ namespace ServiceClassLibrary
     public interface IMessage
     {
         [OperationContract(IsOneWay = true)]
-        void AddMessage(string message, string sender);
+        void AddMessage(string message, string sender, bool convMode);
         [OperationContract]
         bool Subscribe(string name);
         [OperationContract]

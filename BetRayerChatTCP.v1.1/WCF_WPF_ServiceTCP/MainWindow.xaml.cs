@@ -72,9 +72,9 @@ namespace WCF_WPF_ServiceTCP
             }
         }
 
-        public void AddMessage(string message, string sender)
+        public void AddMessage(string message, string sender, bool convMode)
         {
-            string messText = $"{sender} ---> {message.LatToArmConverter1()}";
+            string messText = convMode?$"{sender} ---> {message.LatToArmConverter1()}": $"{sender} ---> {message}";
             subscribers.ForEach(delegate (IMessageCallback callback)
             {
                 if (((ICommunicationObject)callback).State == CommunicationState.Opened)
