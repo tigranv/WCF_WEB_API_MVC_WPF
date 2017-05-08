@@ -145,7 +145,6 @@ namespace GraphPlotApiClientWPF
         private void RB_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton s = (RadioButton)sender;
-            // Action on Check...
             JustChecked = true;
         }
 

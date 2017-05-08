@@ -9,8 +9,7 @@ namespace GraphPlottinAPI.Models
     {
 
         public List<Point> GetXY(string functName, RequestParameters par)
-        {
-            
+        {     
             List<Point> xyList = new List<Point>();
 
             switch (functName)
@@ -59,14 +58,8 @@ namespace GraphPlottinAPI.Models
                         break;
                     }
 
-            }
-            
-
-            
+            }            
             return xyList;
         }
-        
-
-
     }
 }
