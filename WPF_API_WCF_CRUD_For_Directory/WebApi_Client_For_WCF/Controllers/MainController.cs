@@ -13,7 +13,7 @@ namespace WebApi_Client_For_WCF.Controllers
     public class MainController : ApiController
     {
         ServiceIOClient proxy = new ServiceIOClient();
-        // GET: api/Main
+
         public IEnumerable<string> GetAllFiles(string dirName)
         {
             return proxy.GetAllFilesAsync(dirName).Result;

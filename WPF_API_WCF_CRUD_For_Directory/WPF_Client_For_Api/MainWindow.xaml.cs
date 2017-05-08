@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Web.Script.Serialization;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
@@ -20,9 +10,6 @@ using System.Net.Http.Formatting;
 
 namespace WPF_Client_For_Api
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         ObservableCollection<string> files;
@@ -119,8 +106,6 @@ namespace WPF_Client_For_Api
 
         }
 
-        
-
         private void Create_New_Button_Click_1(object sender, RoutedEventArgs e)
         {
             if(newfilePanal.Visibility == Visibility.Collapsed)
@@ -150,9 +135,7 @@ namespace WPF_Client_For_Api
                     });
             }
 
-        }
-
-        
+        }       
 
         private async void Create_Button_Click(object sender, RoutedEventArgs e)
         {
