@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace WcfServiceLibraryForChat
@@ -45,8 +42,6 @@ namespace WcfServiceLibraryForChat
     public class User
     {
         bool boolValue = true;
-        string stringValue = "Hello ";
-
-       
+        string stringValue = "Hello ";       
     }
 }
