@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfClient", "WpfClient\WpfC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfHost", "WpfHost\WpfHost.csproj", "{AA90A3A0-FB12-4E73-966E-3A023DA0843C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleHosting", "ConsoleHosting\ConsoleHosting.csproj", "{99EE7834-95AC-43B1-9157-BEF40069E8C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindingTypes", "ConsoleHosting\BindingTypes.csproj", "{99EE7834-95AC-43B1-9157-BEF40069E8C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using System.Runtime.Serialization;
 
+
+//full functionality that we need
 namespace ServiceAssembly
 {
     [ServiceContract(CallbackContract = typeof(IChatCallback),

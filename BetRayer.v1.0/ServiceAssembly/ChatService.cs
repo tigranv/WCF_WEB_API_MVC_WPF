@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 
+
+//service contract realization
 namespace ServiceAssembly
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
