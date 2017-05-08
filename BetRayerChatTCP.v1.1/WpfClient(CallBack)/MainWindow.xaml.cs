@@ -178,11 +178,11 @@ namespace WpfClient_CallBack_
             {
                 ListBox_OnlineUsers.SelectedItem = sender;
                 newMesGrid.Visibility = Visibility.Visible;
-                rooms[sender].PrivatertbMessages.Text += $"{sender} ---> {message + ": " + DateTime.Now.ToString("hh:mm:ss")}" + "\n";
+                rooms[sender].PrivatertbMessages.Text += $"{message + ": " + DateTime.Now.ToString("hh:mm:ss")}" + "\n";
             });
               
             rooms[sender].Show();
-            Thread.Sleep(500);
+            Thread.Sleep(1000);
             newMesGrid.Visibility = Visibility.Collapsed;
         }
     }
