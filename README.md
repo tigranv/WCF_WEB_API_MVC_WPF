@@ -1,4 +1,4 @@
-# ASP.NET WEB.API, MVC, WPF, WCF Projects  <img src="https://cloud.githubusercontent.com/assets/24522089/21962098/41a510c8-db36-11e6-95ef-eb392a0a1919.png" align="right" width="150px" height="150px" /> 
+# ASP.NET WEB.API, MVC, WPF, WCF Projects  
 
 
 ### [BetRayerTCP.v1.1 ---- >WCF, WPF(Chat app, with direct and global chat options)](https://github.com/tigranv/WCF_WEB_API-_MVC_WPF/tree/master/BetRayerChatTCP.v1.1)
