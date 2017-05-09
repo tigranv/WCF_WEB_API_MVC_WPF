@@ -1,4 +1,4 @@
-# ASP.NET WEB.API, MVC, WPF, WCF Projects
+# ASP.NET WEB.API, MVC, WPF, WCF Projects  <img src="https://cloud.githubusercontent.com/assets/24522089/21962098/41a510c8-db36-11e6-95ef-eb392a0a1919.png" align="right" width="150px" height="150px" /> 
 
 
 ### BetRayerTCP.v1.1 ---- >WCF, WPF(Chat app, with direct and global chat options)
@@ -10,3 +10,10 @@
 
 ### WPF-client -----> for WEB.API(Rest Service for WPF and Client For WCF)---->WCF(Service)
 ![gif](https://cloud.githubusercontent.com/assets/24522089/25515062/f6dc9210-2bf2-11e7-9e3d-00f7a9b7422d.gif)
+
+
+<br>
+<br>
+<br>
+
+> Projects written on C# 6.0, .NET Framework 4.6 Visual Studio 2015 Comunity Edition
