@@ -1,4 +1,6 @@
-# BetRayerTCP.v1.1
+# BetRayerTCP.v1.1 
+
+IChat and ICallback contracts 
 
 Chat app using netTcpbinding, direct and global chat options
 
