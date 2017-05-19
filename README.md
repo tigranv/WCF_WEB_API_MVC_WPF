@@ -6,7 +6,10 @@ The examples of REST services are presented, the TCP binding and SignalR project
 
 <br/>
 
-## [BetRayerTCP.v1.1 (WCF Service - WPF Client)](https://github.com/tigranv/WCF_WEB_API-_MVC_WPF/tree/master/BetRayerChatTCP.v1.1)
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+### [BetRayerTCP.v1.1 (WCF Service - WPF Client)](https://github.com/tigranv/WCF_WEB_API-_MVC_WPF/tree/master/BetRayerChatTCP.v1.1)
 
 The Chat Application with direct and global chat options (TCP binding and collback methods)
 
@@ -15,7 +18,7 @@ The Chat Application with direct and global chat options (TCP binding and collba
 
 
 
-## [Graphs Plotter (Client-WPF, REST service - WEB.API)](https://github.com/tigranv/WCF_WEB_API-_MVC_WPF/tree/master/API%20For%20Graphics%20Plotting)
+### [Graphs Plotter (Client-WPF, REST service - WEB.API)](https://github.com/tigranv/WCF_WEB_API-_MVC_WPF/tree/master/API%20For%20Graphics%20Plotting)
 
 The WPF application for plotting and comparing graphs Sin cos functions with adjustable parameters 
 
@@ -24,7 +27,7 @@ The WPF application for plotting and comparing graphs Sin cos functions with adj
 
 
 
-## [Directory Manager](https://github.com/tigranv/WCF_WEB_API-_MVC_WPF/tree/master/WPF_API_WCF_CRUD_For_Directory)
+### [Directory Manager](https://github.com/tigranv/WCF_WEB_API-_MVC_WPF/tree/master/WPF_API_WCF_CRUD_For_Directory)
 
 WPF-client for WEB.API(Rest Service for WPF and Client For WCF Service
 
