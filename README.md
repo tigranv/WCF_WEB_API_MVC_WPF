@@ -14,9 +14,9 @@ The Chat Application with direct and global chat options (TCP binding and collba
 
 <br>
 
-### [Client-WPF, REST service ---- >WEB.API(functions graphs data provider)](https://github.com/tigranv/WCF_WEB_API-_MVC_WPF/tree/master/API%20For%20Graphics%20Plotting)
+### [Graphs Plotter (Client-WPF, REST service - WEB.API)](https://github.com/tigranv/WCF_WEB_API-_MVC_WPF/tree/master/API%20For%20Graphics%20Plotting)
 
-<br>
+The WPF application for plotting and comparing graphs Sin cos functions with adjustable parameters 
 
 ![bug is fixed](https://cloud.githubusercontent.com/assets/24522089/25308291/f40e6a98-27c1-11e7-9d40-bb4f4661dbea.PNG)
 
