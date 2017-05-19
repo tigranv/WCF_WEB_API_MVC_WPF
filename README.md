@@ -5,7 +5,6 @@ These projects used the following technologies: ASP.NET WebApi, WCF, WPF (XAML),
 The examples of REST services are presented, the TCP binding and SignalR projects is also included
 
 <br/>
-
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 
