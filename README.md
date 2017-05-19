@@ -11,6 +11,7 @@ The examples of REST services are presented, the TCP binding and SignalR project
 The Chat Application with direct and global chat options (TCP binding and collback methods)
 
 ![net tcp pear to pear and global chat](https://cloud.githubusercontent.com/assets/24522089/25782649/22f6e692-3360-11e7-8115-ed3912c4cdc4.gif)
+---------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -19,6 +20,7 @@ The Chat Application with direct and global chat options (TCP binding and collba
 The WPF application for plotting and comparing graphs Sin cos functions with adjustable parameters 
 
 ![bug is fixed](https://cloud.githubusercontent.com/assets/24522089/25308291/f40e6a98-27c1-11e7-9d40-bb4f4661dbea.PNG)
+---------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -27,10 +29,9 @@ The WPF application for plotting and comparing graphs Sin cos functions with adj
 WPF-client for WEB.API(Rest Service for WPF and Client For WCF Service
 
 ![gif](https://cloud.githubusercontent.com/assets/24522089/25515062/f6dc9210-2bf2-11e7-9e3d-00f7a9b7422d.gif)
+---------------------------------------------------------------------------------------------------------------------------------------
 
 
-<br>
-<br>
 <br>
 
 > Projects written on C# 6.0, .NET Framework 4.6 Visual Studio 2015 Comunity Edition
