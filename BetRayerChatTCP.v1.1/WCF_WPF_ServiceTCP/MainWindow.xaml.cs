@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Windows;
-using LatinTo_ArmClassLibrary;
 using System.Collections.ObjectModel;
 using ServiceClassLibrary;
 using System.Windows.Media;
+using Google.API.Translate;
+using LatinTo_ArmClassLibrary;
 
 namespace WCF_WPF_ServiceTCP
 {
@@ -104,8 +105,10 @@ namespace WCF_WPF_ServiceTCP
 
         public void AddMessage(string message, string sender, bool convMode)
         {
+            //string language;
+            //TranslateClient client = new TranslateClient("");
+            //string translate = client.TranslateAndDetect(message, (string)Google.API.Translate.Language.English, out language);
             string messText = convMode?$"{sender} ---> {message.LatToArmConverter1()}": $"{sender} ---> {message}";
-
             foreach (var item in subscribers)
             {
                 if (((ICommunicationObject)item.Value).State == CommunicationState.Opened)
@@ -131,6 +134,7 @@ namespace WCF_WPF_ServiceTCP
             //    }
             //});    
         }
+        
 
         public void SendOnlineUsers()
         {
